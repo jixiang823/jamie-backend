@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jamie.jmeter.dao.DashboardMapper">
+  <resultMap id="BaseResultMap" type="com.jamie.jmeter.pojo.Dashboard">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="env" jdbcType="VARCHAR" property="env" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="case_num" jdbcType="INTEGER" property="caseNum" />
+    <result column="case_pass_num" jdbcType="INTEGER" property="casePassNum" />
+    <result column="case_fail_num" jdbcType="INTEGER" property="caseFailNum" />
+    <result column="case_pass_rate" jdbcType="DECIMAL" property="casePassRate" />
+    <result column="newly_fail_num" jdbcType="INTEGER" property="newlyFailNum" />
+    <result column="keep_failing_num" jdbcType="INTEGER" property="keepFailingNum" />
+    <result column="project_start_time" jdbcType="BIGINT" property="projectStartTime" />
+    <result column="project_end_time" jdbcType="BIGINT" property="projectEndTime" />
+    <result column="project_duration" jdbcType="BIGINT" property="projectDuration" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, batch_no, project_name, env, type, case_num, case_pass_num, case_fail_num, case_pass_rate, 
+    newly_fail_num, keep_failing_num, project_start_time, project_end_time, project_duration
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dashboard
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectLatest" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_dashboard
+    order by id desc LIMIT 0,1
+  </select>
+  <select id="selectMaxBatchNo" resultType="string">
+    select batch_no
+    from tb_dashboard
+    where batch_no like (DATE_FORMAT(NOW(), '%Y%m%d%'))
+    order by batch_no desc limit 0,1
+  </select>
+  <select id="selectFailCaseHistoryResults" resultType="java.util.Map">
+    select
+      case_name as caseName,
+      group_concat( result order by batch_no desc ) as historyResults
+    from
+      tb_testcase
+    where
+        case_name in (
+        select
+          case_name
+        from
+          tb_testcase
+        where
+          batch_no = #{batchNo,jdbcType=VARCHAR}
+          and result = 0
+      )
+    group by
+      case_name
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_dashboard
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jamie.jmeter.pojo.Dashboard">
+    insert into tb_dashboard (id, batch_no, project_name, 
+      env, type, case_num, 
+      case_pass_num, case_fail_num, case_pass_rate, 
+      newly_fail_num, keep_failing_num, project_start_time, 
+      project_end_time, project_duration)
+    values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, 
+      #{env,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{caseNum,jdbcType=INTEGER}, 
+      #{casePassNum,jdbcType=INTEGER}, #{caseFailNum,jdbcType=INTEGER}, #{casePassRate,jdbcType=DECIMAL},
+      #{newlyFailNum,jdbcType=INTEGER}, #{keepFailingNum,jdbcType=INTEGER}, #{projectStartTime,jdbcType=BIGINT}, 
+      #{projectEndTime,jdbcType=BIGINT}, #{projectDuration,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jamie.jmeter.pojo.Dashboard">
+    insert into tb_dashboard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchNo != null">
+        batch_no,
+      </if>
+      <if test="projectName != null">
+        project_name,
+      </if>
+      <if test="env != null">
+        env,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="caseNum != null">
+        case_num,
+      </if>
+      <if test="casePassNum != null">
+        case_pass_num,
+      </if>
+      <if test="caseFailNum != null">
+        case_fail_num,
+      </if>
+      <if test="casePassRate != null">
+        case_pass_rate,
+      </if>
+      <if test="newlyFailNum != null">
+        newly_fail_num,
+      </if>
+      <if test="keepFailingNum != null">
+        keep_failing_num,
+      </if>
+      <if test="projectStartTime != null">
+        project_start_time,
+      </if>
+      <if test="projectEndTime != null">
+        project_end_time,
+      </if>
+      <if test="projectDuration != null">
+        project_duration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null">
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="env != null">
+        #{env,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="caseNum != null">
+        #{caseNum,jdbcType=INTEGER},
+      </if>
+      <if test="casePassNum != null">
+        #{casePassNum,jdbcType=INTEGER},
+      </if>
+      <if test="caseFailNum != null">
+        #{caseFailNum,jdbcType=INTEGER},
+      </if>
+      <if test="casePassRate != null">
+        #{casePassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="newlyFailNum != null">
+        #{newlyFailNum,jdbcType=INTEGER},
+      </if>
+      <if test="keepFailingNum != null">
+        #{keepFailingNum,jdbcType=INTEGER},
+      </if>
+      <if test="projectStartTime != null">
+        #{projectStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="projectEndTime != null">
+        #{projectEndTime,jdbcType=BIGINT},
+      </if>
+      <if test="projectDuration != null">
+        #{projectDuration,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jamie.jmeter.pojo.Dashboard">
+    update tb_dashboard
+    <set>
+      <if test="batchNo != null">
+        batch_no = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="env != null">
+        env = #{env,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="caseNum != null">
+        case_num = #{caseNum,jdbcType=INTEGER},
+      </if>
+      <if test="casePassNum != null">
+        case_pass_num = #{casePassNum,jdbcType=INTEGER},
+      </if>
+      <if test="caseFailNum != null">
+        case_fail_num = #{caseFailNum,jdbcType=INTEGER},
+      </if>
+      <if test="casePassRate != null">
+        case_pass_rate = #{casePassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="newlyFailNum != null">
+        newly_fail_num = #{newlyFailNum,jdbcType=INTEGER},
+      </if>
+      <if test="keepFailingNum != null">
+        keep_failing_num = #{keepFailingNum,jdbcType=INTEGER},
+      </if>
+      <if test="projectStartTime != null">
+        project_start_time = #{projectStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="projectEndTime != null">
+        project_end_time = #{projectEndTime,jdbcType=BIGINT},
+      </if>
+      <if test="projectDuration != null">
+        project_duration = #{projectDuration,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jamie.jmeter.pojo.Dashboard">
+    update tb_dashboard
+    set batch_no = #{batchNo,jdbcType=VARCHAR},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      env = #{env,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      case_num = #{caseNum,jdbcType=INTEGER},
+      case_pass_num = #{casePassNum,jdbcType=INTEGER},
+      case_fail_num = #{caseFailNum,jdbcType=INTEGER},
+      case_pass_rate = #{casePassRate,jdbcType=DECIMAL},
+      newly_fail_num = #{newlyFailNum,jdbcType=INTEGER},
+      keep_failing_num = #{keepFailingNum,jdbcType=INTEGER},
+      project_start_time = #{projectStartTime,jdbcType=BIGINT},
+      project_end_time = #{projectEndTime,jdbcType=BIGINT},
+      project_duration = #{projectDuration,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

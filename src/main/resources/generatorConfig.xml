@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--mysql驱动路径-->
+    <classPathEntry location="/Users/jixiang/Documents/jmeter-report-backend/mysql-connector-java-5.1.6.jar" />
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <!--防止重新生成代码后, mapper.xml被追加写入重复数据-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+
+        <!--去除代码的注释-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库用户名密码等-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/jmeter_report?characterEncoding=UTF-8"
+                        userId="root"
+                        password="12345678">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--对应pojo-->
+        <javaModelGenerator targetPackage="com.jamie.jmeter.pojo" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+<!--            <property name="trimStrings" value="true" />-->
+        </javaModelGenerator>
+
+        <!--对应resources下的mapper目录-->
+        <sqlMapGenerator targetPackage="mappers"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!--对应dao-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jamie.jmeter.dao"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--需要生成的table表名 mvn mybatis-generator:generate-->
+        <table tableName="tb_apiobject"
+               domainObjectName="ApiObject"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+        </table>
+
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jamie.jmeter.dao.TestcaseMapper">
+  <resultMap id="BaseResultMap" type="com.jamie.jmeter.pojo.Testcase">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
+    <result column="case_name" jdbcType="VARCHAR" property="caseName" />
+    <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
+    <result column="case_owner" jdbcType="VARCHAR" property="caseOwner" />
+    <result column="case_step_num" jdbcType="INTEGER" property="caseStepNum" />
+    <result column="result" jdbcType="BOOLEAN" property="result" />
+    <result column="case_start_time" jdbcType="BIGINT" property="caseStartTime" />
+    <result column="case_end_time" jdbcType="BIGINT" property="caseEndTime" />
+    <result column="case_duration" jdbcType="BIGINT" property="caseDuration" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, batch_no, case_name, module_name, case_owner, case_step_num, result, case_start_time, 
+    case_end_time, case_duration
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_testcase
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="page" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    tb_testcase
+    <where>
+      <if test="batchNo != null and batchNo != ''">
+        and batch_no like concat('%',#{batchNo},'%')
+      </if>
+      <if test="caseName != null and caseName != ''">
+        and case_name like concat('%',#{caseName},'%')
+      </if>
+      <if test="moduleName != null and moduleName != ''">
+        and module_name like concat('%',#{moduleName},'%')
+      </if>
+      <if test="caseOwner != null and caseOwner != ''">
+        and case_owner like concat('%',#{caseOwner},'%')
+      </if>
+      <if test="result != null and result != ''">
+        and result like concat('%',#{result},'%')
+      </if>
+    </where>
+    order by
+    <choose>
+      <when test="sort != null and sort !=''">
+        <if test="sort == '-id'">
+          id desc
+        </if>
+        <if test="sort == '+id'">
+          id asc
+        </if>
+      </when>
+      <otherwise>
+        id desc
+      </otherwise>
+    </choose>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_testcase
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jamie.jmeter.pojo.Testcase" useGeneratedKeys="true" keyProperty="id">
+    insert into tb_testcase (id, batch_no, case_name, 
+      module_name, case_owner, case_step_num, 
+      result, case_start_time, case_end_time, 
+      case_duration)
+    values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{caseName,jdbcType=VARCHAR}, 
+      #{moduleName,jdbcType=VARCHAR}, #{caseOwner,jdbcType=VARCHAR}, #{caseStepNum,jdbcType=INTEGER}, 
+      #{result,jdbcType=BOOLEAN}, #{caseStartTime,jdbcType=BIGINT}, #{caseEndTime,jdbcType=BIGINT},
+      #{caseDuration,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jamie.jmeter.pojo.Testcase" useGeneratedKeys="true" keyProperty="id">
+    insert into tb_testcase
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchNo != null">
+        batch_no,
+      </if>
+      <if test="caseName != null">
+        case_name,
+      </if>
+      <if test="moduleName != null">
+        module_name,
+      </if>
+      <if test="caseOwner != null">
+        case_owner,
+      </if>
+      <if test="caseStepNum != null">
+        case_step_num,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="caseStartTime != null">
+        case_start_time,
+      </if>
+      <if test="caseEndTime != null">
+        case_end_time,
+      </if>
+      <if test="caseDuration != null">
+        case_duration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null">
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseName != null">
+        #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleName != null">
+        #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="caseOwner != null">
+        #{caseOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="caseStepNum != null">
+        #{caseStepNum,jdbcType=INTEGER},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=BOOLEAN},
+      </if>
+      <if test="caseStartTime != null">
+        #{caseStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="caseEndTime != null">
+        #{caseEndTime,jdbcType=BIGINT},
+      </if>
+      <if test="caseDuration != null">
+        #{caseDuration,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jamie.jmeter.pojo.Testcase">
+    update tb_testcase
+    <set>
+      <if test="batchNo != null">
+        batch_no = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseName != null">
+        case_name = #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleName != null">
+        module_name = #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="caseOwner != null">
+        case_owner = #{caseOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="caseStepNum != null">
+        case_step_num = #{caseStepNum,jdbcType=INTEGER},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=BOOLEAN},
+      </if>
+      <if test="caseStartTime != null">
+        case_start_time = #{caseStartTime,jdbcType=BIGINT},
+      </if>
+      <if test="caseEndTime != null">
+        case_end_time = #{caseEndTime,jdbcType=BIGINT},
+      </if>
+      <if test="caseDuration != null">
+        case_duration = #{caseDuration,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jamie.jmeter.pojo.Testcase">
+    update tb_testcase
+    set batch_no = #{batchNo,jdbcType=VARCHAR},
+      case_name = #{caseName,jdbcType=VARCHAR},
+      module_name = #{moduleName,jdbcType=VARCHAR},
+      case_owner = #{caseOwner,jdbcType=VARCHAR},
+      case_step_num = #{caseStepNum,jdbcType=INTEGER},
+      result = #{result,jdbcType=BOOLEAN},
+      case_start_time = #{caseStartTime,jdbcType=BIGINT},
+      case_end_time = #{caseEndTime,jdbcType=BIGINT},
+      case_duration = #{caseDuration,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
