@@ -14,7 +14,7 @@ public class ApiObjectForm {
     private String responseBody; // 响应
     private String responseCode; // 响应码
     private String assertMessage; // 接口断言信息
-    private Boolean result; // 接口是否执行成功 0:成功 1:失败
+    private Boolean apiResult; // 接口是否执行成功 0:成功 1:失败
     private Long apiStartTime; // 接口执行开始时间
     private Long apiEndTime; // 接口执行结束时间
     private Long apiDuration; // 接口执行持续时间

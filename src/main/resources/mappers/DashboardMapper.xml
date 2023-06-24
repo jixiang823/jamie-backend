@@ -5,8 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
-    <result column="env" jdbcType="VARCHAR" property="env" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="build_env" jdbcType="VARCHAR" property="buildEnv" />
+    <result column="build_type" jdbcType="INTEGER" property="buildType" />
     <result column="case_num" jdbcType="INTEGER" property="caseNum" />
     <result column="case_pass_num" jdbcType="INTEGER" property="casePassNum" />
     <result column="case_fail_num" jdbcType="INTEGER" property="caseFailNum" />
@@ -18,7 +18,7 @@
     <result column="project_duration" jdbcType="BIGINT" property="projectDuration" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, batch_no, project_name, env, type, case_num, case_pass_num, case_fail_num, case_pass_rate, 
+    id, batch_no, project_name, build_env, build_type, case_num, case_pass_num, case_fail_num, case_pass_rate,
     newly_fail_num, keep_failing_num, project_start_time, project_end_time, project_duration
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -36,13 +36,13 @@
   <select id="selectMaxBatchNo" resultType="string">
     select batch_no
     from tb_dashboard
-    where batch_no like (DATE_FORMAT(NOW(), '%Y%m%d%'))
+    where batch_no like (date_format(now(), '%Y%m%d%'))
     order by batch_no desc limit 0,1
   </select>
   <select id="selectFailCaseHistoryResults" resultType="java.util.Map">
     select
       case_name as caseName,
-      group_concat( result order by batch_no desc ) as historyResults
+      group_concat( case_result order by batch_no desc ) as historyResults
     from
       tb_testcase
     where
@@ -53,7 +53,7 @@
           tb_testcase
         where
           batch_no = #{batchNo,jdbcType=VARCHAR}
-          and result = 0
+          and case_result = 0
       )
     group by
       case_name
@@ -64,12 +64,12 @@
   </delete>
   <insert id="insert" parameterType="com.jamie.jmeter.pojo.Dashboard">
     insert into tb_dashboard (id, batch_no, project_name, 
-      env, type, case_num, 
+      build_env, build_type, case_num,
       case_pass_num, case_fail_num, case_pass_rate, 
       newly_fail_num, keep_failing_num, project_start_time, 
       project_end_time, project_duration)
     values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, 
-      #{env,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{caseNum,jdbcType=INTEGER}, 
+      #{buildEnv,jdbcType=VARCHAR}, #{buildType,jdbcType=INTEGER}, #{caseNum,jdbcType=INTEGER},
       #{casePassNum,jdbcType=INTEGER}, #{caseFailNum,jdbcType=INTEGER}, #{casePassRate,jdbcType=DECIMAL},
       #{newlyFailNum,jdbcType=INTEGER}, #{keepFailingNum,jdbcType=INTEGER}, #{projectStartTime,jdbcType=BIGINT}, 
       #{projectEndTime,jdbcType=BIGINT}, #{projectDuration,jdbcType=BIGINT})
@@ -86,11 +86,11 @@
       <if test="projectName != null">
         project_name,
       </if>
-      <if test="env != null">
-        env,
+      <if test="buildEnv != null">
+        build_env,
       </if>
-      <if test="type != null">
-        type,
+      <if test="buildType != null">
+        build_type,
       </if>
       <if test="caseNum != null">
         case_num,
@@ -130,11 +130,11 @@
       <if test="projectName != null">
         #{projectName,jdbcType=VARCHAR},
       </if>
-      <if test="env != null">
-        #{env,jdbcType=VARCHAR},
+      <if test="buildEnv != null">
+        #{buildEnv,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
+      <if test="buildType != null">
+        #{buildType,jdbcType=INTEGER},
       </if>
       <if test="caseNum != null">
         #{caseNum,jdbcType=INTEGER},
@@ -174,11 +174,11 @@
       <if test="projectName != null">
         project_name = #{projectName,jdbcType=VARCHAR},
       </if>
-      <if test="env != null">
-        env = #{env,jdbcType=VARCHAR},
+      <if test="buildEnv != null">
+        build_env = #{buildEnv,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
+      <if test="buildType != null">
+        build_type = #{buildType,jdbcType=INTEGER},
       </if>
       <if test="caseNum != null">
         case_num = #{caseNum,jdbcType=INTEGER},
@@ -214,8 +214,8 @@
     update tb_dashboard
     set batch_no = #{batchNo,jdbcType=VARCHAR},
       project_name = #{projectName,jdbcType=VARCHAR},
-      env = #{env,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
+      build_env = #{buildEnv,jdbcType=VARCHAR},
+      build_type = #{buildType,jdbcType=INTEGER},
       case_num = #{caseNum,jdbcType=INTEGER},
       case_pass_num = #{casePassNum,jdbcType=INTEGER},
       case_fail_num = #{caseFailNum,jdbcType=INTEGER},

@@ -8,13 +8,13 @@
     <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
     <result column="case_owner" jdbcType="VARCHAR" property="caseOwner" />
     <result column="case_step_num" jdbcType="INTEGER" property="caseStepNum" />
-    <result column="result" jdbcType="BOOLEAN" property="result" />
+    <result column="case_result" jdbcType="BOOLEAN" property="caseResult" />
     <result column="case_start_time" jdbcType="BIGINT" property="caseStartTime" />
     <result column="case_end_time" jdbcType="BIGINT" property="caseEndTime" />
     <result column="case_duration" jdbcType="BIGINT" property="caseDuration" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, batch_no, case_name, module_name, case_owner, case_step_num, result, case_start_time, 
+    id, batch_no, case_name, module_name, case_owner, case_step_num, case_result, case_start_time,
     case_end_time, case_duration
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -41,8 +41,8 @@
       <if test="caseOwner != null and caseOwner != ''">
         and case_owner like concat('%',#{caseOwner},'%')
       </if>
-      <if test="result != null and result != ''">
-        and result like concat('%',#{result},'%')
+      <if test="caseResult != null and caseResult != ''">
+        and case_result like concat('%',#{caseResult},'%')
       </if>
     </where>
     order by
@@ -67,11 +67,11 @@
   <insert id="insert" parameterType="com.jamie.jmeter.pojo.Testcase" useGeneratedKeys="true" keyProperty="id">
     insert into tb_testcase (id, batch_no, case_name, 
       module_name, case_owner, case_step_num, 
-      result, case_start_time, case_end_time, 
+      case_result, case_start_time, case_end_time,
       case_duration)
     values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{caseName,jdbcType=VARCHAR}, 
       #{moduleName,jdbcType=VARCHAR}, #{caseOwner,jdbcType=VARCHAR}, #{caseStepNum,jdbcType=INTEGER}, 
-      #{result,jdbcType=BOOLEAN}, #{caseStartTime,jdbcType=BIGINT}, #{caseEndTime,jdbcType=BIGINT},
+      #{caseResult,jdbcType=BOOLEAN}, #{caseStartTime,jdbcType=BIGINT}, #{caseEndTime,jdbcType=BIGINT},
       #{caseDuration,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.jamie.jmeter.pojo.Testcase" useGeneratedKeys="true" keyProperty="id">
@@ -95,8 +95,8 @@
       <if test="caseStepNum != null">
         case_step_num,
       </if>
-      <if test="result != null">
-        result,
+      <if test="caseResult != null">
+        case_result,
       </if>
       <if test="caseStartTime != null">
         case_start_time,
@@ -127,8 +127,8 @@
       <if test="caseStepNum != null">
         #{caseStepNum,jdbcType=INTEGER},
       </if>
-      <if test="result != null">
-        #{result,jdbcType=BOOLEAN},
+      <if test="caseResult != null">
+        #{caseResult,jdbcType=BOOLEAN},
       </if>
       <if test="caseStartTime != null">
         #{caseStartTime,jdbcType=BIGINT},
@@ -159,8 +159,8 @@
       <if test="caseStepNum != null">
         case_step_num = #{caseStepNum,jdbcType=INTEGER},
       </if>
-      <if test="result != null">
-        result = #{result,jdbcType=BOOLEAN},
+      <if test="caseResult != null">
+        case_result = #{caseResult,jdbcType=BOOLEAN},
       </if>
       <if test="caseStartTime != null">
         case_start_time = #{caseStartTime,jdbcType=BIGINT},
@@ -181,7 +181,7 @@
       module_name = #{moduleName,jdbcType=VARCHAR},
       case_owner = #{caseOwner,jdbcType=VARCHAR},
       case_step_num = #{caseStepNum,jdbcType=INTEGER},
-      result = #{result,jdbcType=BOOLEAN},
+      case_result = #{caseResult,jdbcType=BOOLEAN},
       case_start_time = #{caseStartTime,jdbcType=BIGINT},
       case_end_time = #{caseEndTime,jdbcType=BIGINT},
       case_duration = #{caseDuration,jdbcType=BIGINT}

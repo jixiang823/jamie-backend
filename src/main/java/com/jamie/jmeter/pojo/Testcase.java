@@ -11,7 +11,7 @@ public class Testcase {
     private String moduleName;
     private String caseOwner;
     private Integer caseStepNum;
-    private Boolean result;
+    private Boolean caseResult;
     private Long caseStartTime;
     private Long caseEndTime;
     private Long caseDuration;

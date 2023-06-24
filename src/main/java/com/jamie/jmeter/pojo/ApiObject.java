@@ -17,7 +17,7 @@ public class ApiObject {
     private String responseBody;
     private String responseCode;
     private String assertMessage;
-    private Boolean result;
+    private Boolean apiResult;
     private Long apiStartTime;
     private Long apiEndTime;
     private Long apiDuration;

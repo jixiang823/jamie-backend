@@ -9,7 +9,7 @@ public class TestcaseFilterVo {
     private String caseName;
     private String moduleName;
     private String caseOwner;
-    private Boolean result;
+    private Boolean caseResult;
     private Integer pageNum;
     private Integer pageSize;
     private String sort;

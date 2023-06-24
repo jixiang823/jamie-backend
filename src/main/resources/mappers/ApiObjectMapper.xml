@@ -14,14 +14,14 @@
     <result column="response_body" jdbcType="VARCHAR" property="responseBody" />
     <result column="response_code" jdbcType="VARCHAR" property="responseCode" />
     <result column="assert_message" jdbcType="VARCHAR" property="assertMessage" />
-    <result column="result" jdbcType="BOOLEAN" property="result" />
+    <result column="api_result" jdbcType="BOOLEAN" property="apiResult" />
     <result column="api_start_time" jdbcType="BIGINT" property="apiStartTime" />
     <result column="api_end_time" jdbcType="BIGINT" property="apiEndTime" />
     <result column="api_duration" jdbcType="BIGINT" property="apiDuration" />
   </resultMap>
   <sql id="Base_Column_List">
     id, case_id, batch_no, api_name, request_url, request_method, request_header, request_body,
-    response_header, response_body, response_code, assert_message, result, api_start_time, 
+    response_header, response_body, response_code, assert_message, api_result, api_start_time,
     api_end_time, api_duration
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -44,13 +44,13 @@
     insert into tb_apiobject (id, case_id, batch_no, api_name,
       request_url, request_method, request_header,
       request_body, response_header, response_body,
-      response_code, assert_message, result,
+      response_code, assert_message, api_result,
       api_start_time, api_end_time, api_duration
       )
     values (#{id,jdbcType=INTEGER}, #{caseId,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{apiName,jdbcType=VARCHAR},
       #{requestUrl,jdbcType=VARCHAR}, #{requestMethod,jdbcType=VARCHAR}, #{requestHeader,jdbcType=VARCHAR},
       #{requestBody,jdbcType=VARCHAR}, #{responseHeader,jdbcType=VARCHAR}, #{responseBody,jdbcType=VARCHAR},
-      #{responseCode,jdbcType=VARCHAR}, #{assertMessage,jdbcType=VARCHAR}, #{result,jdbcType=BOOLEAN},
+      #{responseCode,jdbcType=VARCHAR}, #{assertMessage,jdbcType=VARCHAR}, #{apiResult,jdbcType=BOOLEAN},
       #{apiStartTime,jdbcType=BIGINT}, #{apiEndTime,jdbcType=BIGINT}, #{apiDuration,jdbcType=BIGINT}
       )
   </insert>
@@ -93,8 +93,8 @@
       <if test="assertMessage != null">
         assert_message,
       </if>
-      <if test="result != null">
-        result,
+      <if test="apiResult != null">
+        api_result,
       </if>
       <if test="apiStartTime != null">
         api_start_time,
@@ -140,8 +140,8 @@
       <if test="assertMessage != null">
         #{assertMessage,jdbcType=VARCHAR},
       </if>
-      <if test="result != null">
-        #{result,jdbcType=BOOLEAN},
+      <if test="apiResult != null">
+        #{apiResult,jdbcType=BOOLEAN},
       </if>
       <if test="apiStartTime != null">
         #{apiStartTime,jdbcType=BIGINT},
@@ -190,8 +190,8 @@
       <if test="assertMessage != null">
         assert_message = #{assertMessage,jdbcType=VARCHAR},
       </if>
-      <if test="result != null">
-        result = #{result,jdbcType=BOOLEAN},
+      <if test="apiResult != null">
+        api_result = #{apiResult,jdbcType=BOOLEAN},
       </if>
       <if test="apiStartTime != null">
         api_start_time = #{apiStartTime,jdbcType=BIGINT},
@@ -218,7 +218,7 @@
       response_body = #{responseBody,jdbcType=VARCHAR},
       response_code = #{responseCode,jdbcType=VARCHAR},
       assert_message = #{assertMessage,jdbcType=VARCHAR},
-      result = #{result,jdbcType=BOOLEAN},
+      api_result = #{apiResult,jdbcType=BOOLEAN},
       api_start_time = #{apiStartTime,jdbcType=BIGINT},
       api_end_time = #{apiEndTime,jdbcType=BIGINT},
       api_duration = #{apiDuration,jdbcType=BIGINT}

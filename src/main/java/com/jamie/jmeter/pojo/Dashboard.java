@@ -10,8 +10,8 @@ public class Dashboard {
     private Integer id;
     private String batchNo;
     private String projectName;
-    private String env;
-    private Integer type;
+    private String buildEnv;
+    private Integer buildType;
     private Integer caseNum;
     private Integer casePassNum;
     private Integer caseFailNum;

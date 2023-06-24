@@ -68,6 +68,7 @@ public class JMeterReportModelServiceImpl implements IJMeterReportModelService {
         dashboard.setBatchNo(batchNo);
         dashboardMapper.insert(dashboard);
 
+        // TODO 避免循环体里频繁插入数据
         List<TestCaseModel> testCaseModels = jMeterReportModel.getTestCaseModels();
         for (TestCaseModel testCaseModel : testCaseModels) {
             // 插入CaseInfo
@@ -142,7 +143,7 @@ public class JMeterReportModelServiceImpl implements IJMeterReportModelService {
         queryKeywords.put("caseName", testcaseFilterVo.getCaseName());
         queryKeywords.put("moduleName", testcaseFilterVo.getModuleName());
         queryKeywords.put("caseOwner", testcaseFilterVo.getCaseOwner());
-        queryKeywords.put("result", testcaseFilterVo.getResult());
+        queryKeywords.put("caseResult", testcaseFilterVo.getCaseResult());
         queryKeywords.put("sort", testcaseFilterVo.getSort());
         List<Testcase> page = testcaseMapper.page(queryKeywords);
         PageInfo<Testcase> pageInfo = new PageInfo<>();

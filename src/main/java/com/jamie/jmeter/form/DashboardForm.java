@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 public class DashboardForm {
 
     private String projectName; // 项目名称 ok
-    private String env; // 用例执行环境 ok
-    private Integer type; // 用例构建方式 0:自动 1:手动 ok
+    private String buildEnv; // 用例执行环境 ok
+    private Integer buildType; // 用例构建方式 0:自动 1:手动 ok
     private Integer caseNum; // 执行的用例总数
     private Integer casePassNum; // 执行成功的用例总数
     private Integer caseFailNum; // 执行失败的用例总数
