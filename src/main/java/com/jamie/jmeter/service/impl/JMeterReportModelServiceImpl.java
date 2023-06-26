@@ -7,9 +7,6 @@ import com.jamie.jmeter.dao.ApiObjectMapper;
 import com.jamie.jmeter.dao.DashboardMapper;
 import com.jamie.jmeter.dao.TestcaseMapper;
 import com.jamie.jmeter.enums.ResponseEnum;
-import com.jamie.jmeter.form.ApiObjectForm;
-import com.jamie.jmeter.form.DashboardForm;
-import com.jamie.jmeter.form.TestCaseForm;
 import com.jamie.jmeter.model.JMeterReportModel;
 import com.jamie.jmeter.model.TestCaseModel;
 import com.jamie.jmeter.pojo.ApiObject;
@@ -25,10 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -51,9 +45,7 @@ public class JMeterReportModelServiceImpl implements IJMeterReportModelService {
 
         JMeterReportModel jMeterReportModel = GsonUtil.jsonToBean(reportData, JMeterReportModel.class);
 
-        DashboardForm dashboardForm = jMeterReportModel.getDashboard();
-        Dashboard dashboard = new Dashboard();
-        BeanUtils.copyProperties(dashboardForm,dashboard);
+        Dashboard dashboard = jMeterReportModel.getDashboard();
         // 生成批次号
         String batchNo;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -72,24 +64,34 @@ public class JMeterReportModelServiceImpl implements IJMeterReportModelService {
         List<TestCaseModel> testCaseModels = jMeterReportModel.getTestCaseModels();
         for (TestCaseModel testCaseModel : testCaseModels) {
             // 插入CaseInfo
-            TestCaseForm caseInfo = testCaseModel.getCaseInfo();
-            Testcase testcase = new Testcase();
-            BeanUtils.copyProperties(caseInfo,testcase);
-            testcase.setBatchNo(batchNo);
-            testcaseMapper.insert(testcase);
+            Testcase caseInfo = testCaseModel.getCaseInfo();
+            caseInfo.setBatchNo(batchNo);
+            testcaseMapper.insert(caseInfo);
             // 插入CaseSteps
-            List<ApiObjectForm> caseSteps = testCaseModel.getCaseSteps();
-            for (ApiObjectForm caseStep : caseSteps) {
-                ApiObject apiObject = new ApiObject();
-                BeanUtils.copyProperties(caseStep,apiObject);
-                apiObject.setCaseId(testcase.getId());
-                apiObject.setBatchNo(batchNo);
-                apiObjectMapper.insert(apiObject);
+            List<ApiObject> caseSteps = testCaseModel.getCaseSteps();
+            Integer caseId = caseInfo.getId();
+            for (ApiObject caseStep : caseSteps) {
+                caseStep.setCaseId(caseId);
+                caseStep.setBatchNo(batchNo);
+                apiObjectMapper.insert(caseStep);
             }
         }
 
         return ResponseVo.success(jMeterReportModel);
 
+    }
+
+    // TODO
+    private List<ApiObject> buildCaseSteps(String batchNo, List<Integer> caseIdList, List<ApiObject> apiObjectList) {
+        ApiObject apiObject = new ApiObject();
+        List<ApiObject> list = new ArrayList<>();
+        for (int i = 0; i < caseIdList.size(); i++) {
+            apiObject.setBatchNo(batchNo);
+            apiObject.setCaseId(caseIdList.get(i));
+            BeanUtils.copyProperties(apiObjectList.get(i), apiObject);
+            list.add(apiObject);
+        }
+        return list;
     }
 
     /**
