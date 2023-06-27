@@ -5,13 +5,13 @@ import com.github.pagehelper.PageInfo;
 import com.jamie.jmeter.constant.PageConst;
 import com.jamie.jmeter.dao.ApiObjectMapper;
 import com.jamie.jmeter.dao.DashboardMapper;
-import com.jamie.jmeter.dao.TestcaseMapper;
+import com.jamie.jmeter.dao.TestCaseMapper;
 import com.jamie.jmeter.enums.ResponseEnum;
 import com.jamie.jmeter.model.JMeterReportModel;
 import com.jamie.jmeter.model.TestCaseModel;
 import com.jamie.jmeter.pojo.ApiObject;
 import com.jamie.jmeter.pojo.Dashboard;
-import com.jamie.jmeter.pojo.Testcase;
+import com.jamie.jmeter.pojo.TestCase;
 import com.jamie.jmeter.service.IJMeterReportModelService;
 import com.jamie.jmeter.utils.GsonUtil;
 import com.jamie.jmeter.vo.TestcaseFilterVo;
@@ -33,20 +33,49 @@ public class JMeterReportModelServiceImpl implements IJMeterReportModelService {
     @Resource
     private DashboardMapper dashboardMapper;
     @Resource
-    private TestcaseMapper testcaseMapper;
+    private TestCaseMapper testcaseMapper;
 
     /**
-     * JMeter测试结果入库
+     * 解析JMeter测试结果并入库
+     *
      * @param reportData 测试数据
      * @return 数据入库
      */
     @Override
-    public ResponseVo<JMeterReportModel> add(String  reportData) {
+    public ResponseVo<JMeterReportModel> add(String reportData) {
 
         JMeterReportModel jMeterReportModel = GsonUtil.jsonToBean(reportData, JMeterReportModel.class);
-
+        // dashboard信息
         Dashboard dashboard = jMeterReportModel.getDashboard();
-        // 生成批次号
+        String batchNo = generateBatchNo();
+        dashboard.setBatchNo(batchNo);
+        int rowForDashboard = dashboardMapper.insert(dashboard);
+        if (rowForDashboard <= 0) {
+            return ResponseVo.error(ResponseEnum.ERROR);
+        }
+        // case信息
+        List<TestCaseModel> testCaseModels = jMeterReportModel.getTestCaseModels();
+        // caseInfo
+        List<TestCase> caseInfoList = buildCaseInfoList(testCaseModels, batchNo);
+        int rowForTestCase = testcaseMapper.batchInsert(caseInfoList);
+        if (rowForTestCase <= 0) {
+            return ResponseVo.error(ResponseEnum.ERROR);
+        }
+        // caseSteps
+        List<List<ApiObject>> caseStepsList = buildCaseStepsList(testCaseModels, batchNo);
+        int rowForApiObject = apiObjectMapper.batchInsert(caseStepsList);
+        if (rowForApiObject <= 0) {
+            return ResponseVo.error(ResponseEnum.ERROR);
+        }
+        return ResponseVo.success(jMeterReportModel);
+
+    }
+
+    /**
+     * 生成BatchNo,格式如20230627001
+     * @return BatchNo
+     */
+    private String generateBatchNo() {
         String batchNo;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String prefix = simpleDateFormat.format(new Date());
@@ -57,45 +86,64 @@ public class JMeterReportModelServiceImpl implements IJMeterReportModelService {
         } else {
             batchNo = String.valueOf(Long.parseLong(maxBatchNo) + 1);
         }
-        dashboard.setBatchNo(batchNo);
-        dashboardMapper.insert(dashboard);
-
-        // TODO 避免循环体里频繁插入数据
-        List<TestCaseModel> testCaseModels = jMeterReportModel.getTestCaseModels();
-        for (TestCaseModel testCaseModel : testCaseModels) {
-            // 插入CaseInfo
-            Testcase caseInfo = testCaseModel.getCaseInfo();
-            caseInfo.setBatchNo(batchNo);
-            testcaseMapper.insert(caseInfo);
-            // 插入CaseSteps
-            List<ApiObject> caseSteps = testCaseModel.getCaseSteps();
-            Integer caseId = caseInfo.getId();
-            for (ApiObject caseStep : caseSteps) {
-                caseStep.setCaseId(caseId);
-                caseStep.setBatchNo(batchNo);
-                apiObjectMapper.insert(caseStep);
-            }
-        }
-
-        return ResponseVo.success(jMeterReportModel);
-
+        return batchNo;
     }
 
-    // TODO
-    private List<ApiObject> buildCaseSteps(String batchNo, List<Integer> caseIdList, List<ApiObject> apiObjectList) {
-        ApiObject apiObject = new ApiObject();
-        List<ApiObject> list = new ArrayList<>();
-        for (int i = 0; i < caseIdList.size(); i++) {
-            apiObject.setBatchNo(batchNo);
-            apiObject.setCaseId(caseIdList.get(i));
-            BeanUtils.copyProperties(apiObjectList.get(i), apiObject);
-            list.add(apiObject);
+    /**
+     * 构造CaseInfoList
+     *
+     * @param testCaseModels 用例信息
+     * @param batchNo        批次号
+     * @return caseInfoList
+     */
+    private List<TestCase> buildCaseInfoList(List<TestCaseModel> testCaseModels, String batchNo) {
+        List<TestCase> caseInfoList = new ArrayList<>();
+        for (TestCaseModel testcaseModel : testCaseModels) {
+            TestCase caseInfo = testcaseModel.getCaseInfo();
+            caseInfo.setBatchNo(batchNo);
+            caseInfoList.add(caseInfo);
         }
-        return list;
+        return caseInfoList;
+    }
+
+    /**
+     * 构造CaseSteps
+     *
+     * @param testCaseModels 未对caseId和batchNo赋值的ApiObject集合
+     * @param batchNo        本次执行的批次号
+     * @return 已对caseId和batchNo赋值的ApiObject集合
+     */
+    private List<List<ApiObject>> buildCaseStepsList(List<TestCaseModel> testCaseModels, String batchNo) {
+
+        List<List<ApiObject>> apiObjectsList = new ArrayList<>();
+        for (TestCaseModel testcaseModel : testCaseModels) {
+            List<ApiObject> apiObjects = testcaseModel.getCaseSteps();
+            apiObjectsList.add(apiObjects);
+        }
+        // 根据本次执行的批次号拿到caseId集合
+        List<Integer> caseIdList = testcaseMapper.selectIdByBatchNo(batchNo);
+        // 把caseId赋值给ApiObject
+        int i = 0;
+        List<List<ApiObject>> caseStepsList = new ArrayList<>();
+        for (List<ApiObject> apiObjects : apiObjectsList) {
+            List<ApiObject> caseStepList = new ArrayList<>();
+            for (ApiObject apiObject : apiObjects) {
+                ApiObject caseStep = new ApiObject();
+                BeanUtils.copyProperties(apiObject, caseStep);
+                caseStep.setCaseId(caseIdList.get(i));
+                caseStep.setBatchNo(batchNo);
+                caseStepList.add(caseStep);
+            }
+            caseStepsList.add(caseStepList);
+            i += 1;
+        }
+        return caseStepsList;
+
     }
 
     /**
      * 获取看板数据,统计'新增失败'和'持续失败'数据.
+     *
      * @return 看板数据
      */
     @Override
@@ -129,11 +177,12 @@ public class JMeterReportModelServiceImpl implements IJMeterReportModelService {
 
     /**
      * 分页查询
+     *
      * @param testcaseFilterVo 查询条件
      * @return Testcase
      */
     @Override
-    public ResponseVo<PageInfo<Testcase>> list(TestcaseFilterVo testcaseFilterVo) {
+    public ResponseVo<PageInfo<TestCase>> list(TestcaseFilterVo testcaseFilterVo) {
 
         PageHelper.startPage(testcaseFilterVo.getPageNum(), testcaseFilterVo.getPageSize());
         if (testcaseFilterVo.getPageNum() == null || testcaseFilterVo.getPageSize() == null) {
@@ -147,8 +196,8 @@ public class JMeterReportModelServiceImpl implements IJMeterReportModelService {
         queryKeywords.put("caseOwner", testcaseFilterVo.getCaseOwner());
         queryKeywords.put("caseResult", testcaseFilterVo.getCaseResult());
         queryKeywords.put("sort", testcaseFilterVo.getSort());
-        List<Testcase> page = testcaseMapper.page(queryKeywords);
-        PageInfo<Testcase> pageInfo = new PageInfo<>();
+        List<TestCase> page = testcaseMapper.page(queryKeywords);
+        PageInfo<TestCase> pageInfo = new PageInfo<>();
         pageInfo.setList(page);
         return ResponseVo.success(pageInfo);
 
@@ -156,6 +205,7 @@ public class JMeterReportModelServiceImpl implements IJMeterReportModelService {
 
     /**
      * 通过用例ID查询CaseSteps
+     *
      * @param caseId 用例ID
      * @return CaseSteps
      */

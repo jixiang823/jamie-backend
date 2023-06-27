@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.jamie.jmeter.model.JMeterReportModel;
 import com.jamie.jmeter.pojo.ApiObject;
 import com.jamie.jmeter.pojo.Dashboard;
-import com.jamie.jmeter.pojo.Testcase;
+import com.jamie.jmeter.pojo.TestCase;
 import com.jamie.jmeter.service.IJMeterReportModelService;
 import com.jamie.jmeter.vo.ResponseVo;
 import com.jamie.jmeter.vo.TestcaseFilterVo;
@@ -39,7 +39,7 @@ public class JMeterReportModelController {
     }
 
     @PostMapping("/jmeter/report/testcase/list")
-    public ResponseVo<PageInfo<Testcase>> list(@RequestBody TestcaseFilterVo testcaseFilterVo) {
+    public ResponseVo<PageInfo<TestCase>> list(@RequestBody TestcaseFilterVo testcaseFilterVo) {
         return jMeterReportModelService.list(testcaseFilterVo);
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jamie.jmeter.dao.TestcaseMapper">
-  <resultMap id="BaseResultMap" type="com.jamie.jmeter.pojo.Testcase">
+<mapper namespace="com.jamie.jmeter.dao.TestCaseMapper">
+  <resultMap id="BaseResultMap" type="com.jamie.jmeter.pojo.TestCase">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
     <result column="case_name" jdbcType="VARCHAR" property="caseName" />
@@ -64,7 +64,7 @@
     delete from tb_testcase
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.jamie.jmeter.pojo.Testcase" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="com.jamie.jmeter.pojo.TestCase" useGeneratedKeys="true" keyProperty="id">
     insert into tb_testcase (id, batch_no, case_name, 
       module_name, case_owner, case_step_num, 
       case_result, case_start_time, case_end_time,
@@ -74,7 +74,30 @@
       #{caseResult,jdbcType=BOOLEAN}, #{caseStartTime,jdbcType=BIGINT}, #{caseEndTime,jdbcType=BIGINT},
       #{caseDuration,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.jamie.jmeter.pojo.Testcase" useGeneratedKeys="true" keyProperty="id">
+  <insert id="batchInsert" parameterType="list">
+    insert into tb_testcase (batch_no, case_name, module_name, case_owner, case_step_num, case_result, case_start_time,
+    case_end_time, case_duration)
+    values
+    <foreach collection="caseInfoList" index="index" item="caseInfo" separator=",">
+      (
+      #{caseInfo.batchNo},
+      #{caseInfo.caseName},
+      #{caseInfo.moduleName},
+      #{caseInfo.caseOwner},
+      #{caseInfo.caseStepNum},
+      #{caseInfo.caseResult},
+      #{caseInfo.caseStartTime},
+      #{caseInfo.caseEndTime},
+      #{caseInfo.caseDuration}
+      )
+    </foreach>
+  </insert>
+  <select id="selectIdByBatchNo" parameterType="string" resultType="integer">
+    select id
+    from tb_testcase
+    where batch_no = #{batchNo,jdbcType=VARCHAR}
+  </select>
+  <insert id="insertSelective" parameterType="com.jamie.jmeter.pojo.TestCase" useGeneratedKeys="true" keyProperty="id">
     insert into tb_testcase
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -141,7 +164,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jamie.jmeter.pojo.Testcase">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jamie.jmeter.pojo.TestCase">
     update tb_testcase
     <set>
       <if test="batchNo != null">
@@ -174,7 +197,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jamie.jmeter.pojo.Testcase">
+  <update id="updateByPrimaryKey" parameterType="com.jamie.jmeter.pojo.TestCase">
     update tb_testcase
     set batch_no = #{batchNo,jdbcType=VARCHAR},
       case_name = #{caseName,jdbcType=VARCHAR},

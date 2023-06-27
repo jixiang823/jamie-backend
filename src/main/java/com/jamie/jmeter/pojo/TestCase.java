@@ -3,7 +3,7 @@ package com.jamie.jmeter.pojo;
 import lombok.Data;
 
 @Data
-public class Testcase {
+public class TestCase {
 
     private Integer id;
     private String batchNo;

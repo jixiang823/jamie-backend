@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.jamie.jmeter.model.JMeterReportModel;
 import com.jamie.jmeter.pojo.ApiObject;
 import com.jamie.jmeter.pojo.Dashboard;
-import com.jamie.jmeter.pojo.Testcase;
+import com.jamie.jmeter.pojo.TestCase;
 import com.jamie.jmeter.vo.TestcaseFilterVo;
 import com.jamie.jmeter.vo.ResponseVo;
 
@@ -20,7 +20,7 @@ public interface IJMeterReportModelService {
     // 用于统计执行失败的测试用例的历史执行结果
     ResponseVo<List<Map<String, String>>> getFailCaseHistoryResults();
     // 获取用例列表数据
-    ResponseVo<PageInfo<Testcase>> list(TestcaseFilterVo testcaseFilterVo);
+    ResponseVo<PageInfo<TestCase>> list(TestcaseFilterVo testcaseFilterVo);
     // 获取用例详情数据
     ResponseVo<List<ApiObject>> steps(Integer caseId);
 

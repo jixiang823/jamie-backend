@@ -1,6 +1,7 @@
 package com.jamie.jmeter;
 
 import com.jamie.jmeter.dao.DashboardMapper;
+import com.jamie.jmeter.dao.TestCaseMapper;
 import com.jamie.jmeter.model.JMeterReportModel;
 import com.jamie.jmeter.utils.GsonUtil;
 import org.junit.jupiter.api.Test;
@@ -9,12 +10,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 class JmeterReportBackendApplicationTests {
 
     @Resource
     private DashboardMapper dashboardMapper;
+
+    @Resource
+    private TestCaseMapper testCaseMapper;
 
     @Test
     void contextLoads() {

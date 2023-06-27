@@ -1,6 +1,7 @@
 package com.jamie.jmeter.dao;
 
 import com.jamie.jmeter.pojo.ApiObject;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -8,6 +9,8 @@ public interface ApiObjectMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(ApiObject row);
+
+    int batchInsert(@Param("caseStepsList") List<List<ApiObject>> caseStepsList); // 避免循环体内操作数据库
 
     int insertSelective(ApiObject row);
 

@@ -54,6 +54,33 @@
       #{apiStartTime,jdbcType=BIGINT}, #{apiEndTime,jdbcType=BIGINT}, #{apiDuration,jdbcType=BIGINT}
       )
   </insert>
+  <insert id="batchInsert" parameterType="list">
+    insert into tb_apiobject (case_id, batch_no, api_name, request_url, request_method, request_header, request_body,
+    response_header, response_body, response_code, assert_message, api_result, api_start_time,
+    api_end_time, api_duration)
+    values
+    <foreach collection="caseStepsList" index="index" item="caseSteps" separator=",">
+      <foreach collection="caseSteps" index="index" item="caseStep" separator=",">
+        (
+        #{caseStep.caseId},
+        #{caseStep.batchNo},
+        #{caseStep.apiName},
+        #{caseStep.requestUrl},
+        #{caseStep.requestMethod},
+        #{caseStep.requestHeader},
+        #{caseStep.requestBody},
+        #{caseStep.responseHeader},
+        #{caseStep.responseBody},
+        #{caseStep.responseCode},
+        #{caseStep.assertMessage},
+        #{caseStep.apiResult},
+        #{caseStep.apiStartTime},
+        #{caseStep.apiEndTime},
+        #{caseStep.apiDuration}
+        )
+      </foreach>
+    </foreach>
+  </insert>
   <insert id="insertSelective" parameterType="com.jamie.jmeter.pojo.ApiObject">
     insert into tb_apiobject
     <trim prefix="(" suffix=")" suffixOverrides=",">
