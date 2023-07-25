@@ -49,7 +49,7 @@ public class ProcessServiceImpl implements IProcessService {
                 while ((len = inputStreamReader.read(chs)) != -1) {
                     // TODO 得到了文件路径数据,暂时没用.
                     scriptPaths.add(new String(chs, 0, len));
-                    log.info("scriptPaths: {}", scriptPaths.toString());
+                    log.info("scriptPaths: {}", scriptPaths);
                 }
                 inputStreamReader.close();
                 inputStream.close();
