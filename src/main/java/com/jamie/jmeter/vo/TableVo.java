@@ -1,12 +1,17 @@
-package com.jamie.jmeter.pojo;
+package com.jamie.jmeter.vo;
 
 import lombok.Data;
 
+// dashboard table list
 @Data
-public class TestCase {
+public class TableVo {
 
-    private Integer id;
+    // tb_dashboard
     private String batchNo;
+    private String projectName;
+    private String buildEnv;
+    // tb_testcase
+    private Integer id;
     private String caseName;
     private String moduleName;
     private String caseOwner;
@@ -15,7 +20,6 @@ public class TestCase {
     private Boolean newlyFail;
     private Boolean keepFailing;
     private Long caseStartTime;
-    private Long caseEndTime;
     private Long caseDuration;
 
 }

@@ -6,7 +6,8 @@
     <result column="case_id" jdbcType="INTEGER" property="caseId" />
     <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
     <result column="api_name" jdbcType="VARCHAR" property="apiName" />
-    <result column="request_url" jdbcType="VARCHAR" property="requestUrl" />
+    <result column="request_host" jdbcType="VARCHAR" property="requestHost" />
+    <result column="request_path" jdbcType="VARCHAR" property="requestPath" />
     <result column="request_method" jdbcType="VARCHAR" property="requestMethod" />
     <result column="request_header" jdbcType="VARCHAR" property="requestHeader" />
     <result column="request_body" jdbcType="VARCHAR" property="requestBody" />
@@ -20,7 +21,7 @@
     <result column="api_duration" jdbcType="BIGINT" property="apiDuration" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, case_id, batch_no, api_name, request_url, request_method, request_header, request_body,
+    id, case_id, batch_no, api_name, request_host, request_path, request_method, request_header, request_body,
     response_header, response_body, response_code, assert_message, api_result, api_start_time,
     api_end_time, api_duration
   </sql>
@@ -41,21 +42,21 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jamie.jmeter.pojo.ApiObject">
-    insert into tb_apiobject (id, case_id, batch_no, api_name,
-      request_url, request_method, request_header,
+    insert into tb_apiobject (id, case_id, batch_no, api_name, request_host,
+      request_path, request_method, request_header,
       request_body, response_header, response_body,
       response_code, assert_message, api_result,
       api_start_time, api_end_time, api_duration
       )
-    values (#{id,jdbcType=INTEGER}, #{caseId,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{apiName,jdbcType=VARCHAR},
-      #{requestUrl,jdbcType=VARCHAR}, #{requestMethod,jdbcType=VARCHAR}, #{requestHeader,jdbcType=VARCHAR},
+    values (#{id,jdbcType=INTEGER}, #{caseId,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{apiName,jdbcType=VARCHAR}, #{requestHost,jdbcType=VARCHAR}
+      #{requestPath,jdbcType=VARCHAR}, #{requestMethod,jdbcType=VARCHAR}, #{requestHeader,jdbcType=VARCHAR},
       #{requestBody,jdbcType=VARCHAR}, #{responseHeader,jdbcType=VARCHAR}, #{responseBody,jdbcType=VARCHAR},
       #{responseCode,jdbcType=VARCHAR}, #{assertMessage,jdbcType=VARCHAR}, #{apiResult,jdbcType=BOOLEAN},
       #{apiStartTime,jdbcType=BIGINT}, #{apiEndTime,jdbcType=BIGINT}, #{apiDuration,jdbcType=BIGINT}
       )
   </insert>
   <insert id="batchInsert" parameterType="list">
-    insert into tb_apiobject (case_id, batch_no, api_name, request_url, request_method, request_header, request_body,
+    insert into tb_apiobject (case_id, batch_no, api_name, request_host, request_path, request_method, request_header, request_body,
     response_header, response_body, response_code, assert_message, api_result, api_start_time,
     api_end_time, api_duration)
     values
@@ -65,7 +66,8 @@
         #{caseStep.caseId},
         #{caseStep.batchNo},
         #{caseStep.apiName},
-        #{caseStep.requestUrl},
+        #{caseStep.requestHost},
+        #{caseStep.requestPath},
         #{caseStep.requestMethod},
         #{caseStep.requestHeader},
         #{caseStep.requestBody},
@@ -96,8 +98,11 @@
       <if test="apiName != null">
         api_name,
       </if>
-      <if test="requestUrl != null">
-        request_url,
+      <if test="requestHost != null">
+        request_host,
+      </if>
+      <if test="requestPath != null">
+        request_path,
       </if>
       <if test="requestMethod != null">
         request_method,
@@ -143,8 +148,11 @@
       <if test="apiName != null">
         #{apiName,jdbcType=VARCHAR},
       </if>
-      <if test="requestUrl != null">
-        #{requestUrl,jdbcType=VARCHAR},
+      <if test="requestHost != null">
+        #{requestHost,jdbcType=VARCHAR},
+      </if>
+      <if test="requestPath != null">
+        #{requestPath,jdbcType=VARCHAR},
       </if>
       <if test="requestMethod != null">
         #{requestMethod,jdbcType=VARCHAR},
@@ -193,8 +201,11 @@
       <if test="apiName != null">
         api_name = #{apiName,jdbcType=VARCHAR},
       </if>
-      <if test="requestUrl != null">
-        request_url = #{requestUrl,jdbcType=VARCHAR},
+      <if test="requestHost != null">
+        request_host = #{requestHost,jdbcType=VARCHAR},
+      </if>
+      <if test="requestPath != null">
+        request_path = #{requestPath,jdbcType=VARCHAR},
       </if>
       <if test="requestMethod != null">
         request_method = #{requestMethod,jdbcType=VARCHAR},
@@ -237,7 +248,8 @@
     set case_id = #{caseId,jdbcType=INTEGER},
       batch_no = #{batchNo,jdbcType=VARCHAR},
       api_name = #{apiName,jdbcType=VARCHAR},
-      request_url = #{requestUrl,jdbcType=VARCHAR},
+      request_host = #{requestHost,jdbcType=VARCHAR},
+      request_path = #{requestPath,jdbcType=VARCHAR},
       request_method = #{requestMethod,jdbcType=VARCHAR},
       request_header = #{requestHeader,jdbcType=VARCHAR},
       request_body = #{requestBody,jdbcType=VARCHAR},

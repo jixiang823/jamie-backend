@@ -9,7 +9,8 @@ public class ApiObject {
     private Integer caseId;
     private String batchNo;
     private String apiName;
-    private String requestUrl;
+    private String requestHost;
+    private String requestPath;
     private String requestMethod;
     private String requestHeader;
     private String requestBody;

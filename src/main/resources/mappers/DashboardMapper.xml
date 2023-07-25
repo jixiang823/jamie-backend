@@ -27,11 +27,63 @@
     from tb_dashboard
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectCaseResultTrend" resultType="java.util.Map">
+    select
+      id,
+      case_pass_rate as casePassRate,
+      case_pass_num as casePassNum,
+      case_fail_num as caseFailNum
+    from
+      tb_dashboard
+    order by
+      batch_no desc
+      limit 0,7
+  </select>
+  <select id="selectCaseTotalPassTrend" resultType="java.util.Map">
+    select
+      id,
+      case_pass_num as casePassNum
+    from
+      tb_dashboard
+    order by
+      batch_no desc
+      limit 0,7
+  </select>
+  <select id="selectCaseTotalFailTrend" resultType="java.util.Map">
+    select
+      id,
+      case_fail_num as caseFailNum
+    from
+      tb_dashboard
+    order by
+      batch_no desc
+      limit 0,7
+  </select>
+  <select id="selectCaseNewlyFailTrend" resultType="java.util.Map">
+    select
+      id,
+      newly_fail_num as newlyFailNum
+    from
+      tb_dashboard
+    order by
+      batch_no desc
+      limit 0,7
+  </select>
+  <select id="selectCaseKeepFailingTrend" resultType="java.util.Map">
+    select
+      id,
+      keep_failing_num as keepFailingNum
+    from
+      tb_dashboard
+    order by
+      batch_no desc
+      limit 0,7
+  </select>
   <select id="selectLatest" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tb_dashboard
-    order by id desc LIMIT 0,1
+    order by id desc limit 0,1
   </select>
   <select id="selectMaxBatchNo" resultType="string">
     select batch_no

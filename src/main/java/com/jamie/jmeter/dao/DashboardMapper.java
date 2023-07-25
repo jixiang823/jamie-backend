@@ -14,6 +14,16 @@ public interface DashboardMapper {
 
     Dashboard selectByPrimaryKey(Integer id);
 
+    List<Map<String,Integer>> selectCaseResultTrend(); // line-chart趋势图(记录最近7次)
+
+    List<Map<String,Integer>> selectCaseTotalPassTrend(); // total-pass趋势图(记录最近7次)
+
+    List<Map<String,Integer>> selectCaseTotalFailTrend(); // total-fail趋势图(记录最近7次)
+
+    List<Map<String,Integer>> selectCaseNewlyFailTrend(); // newly-fail趋势图(记录最近7次)
+
+    List<Map<String,Integer>> selectCaseKeepFailingTrend(); // keep-failing趋势图(记录最近7次)
+
     Dashboard selectLatest(); // 查询最新的看板数据
 
     String selectMaxBatchNo(); // 查询当日最大批次号

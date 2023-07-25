@@ -1,5 +1,6 @@
 package com.jamie.jmeter.dao;
 
+import com.jamie.jmeter.vo.TableVo;
 import com.jamie.jmeter.pojo.TestCase;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,11 +18,16 @@ public interface TestCaseMapper {
 
     int insertSelective(TestCase row);
 
+    List<TableVo> selectLatest(); // 获取最新批次的用例信息
+
     TestCase selectByPrimaryKey(Integer id);
 
-    List<TestCase> page(Map<String, Object> queryKeywords); // 分页多条件查询
+    List<TableVo> page(Map<String, Object> queryKeywords); // 分页多条件查询
 
     int updateByPrimaryKeySelective(TestCase row);
 
     int updateByPrimaryKey(TestCase row);
+
+    int updateBatch(List<TestCase> testCases);
+
 }

@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: JiXiang5678!
-    url: jdbc:mysql://rm-uf6580y08e4zmg2xf.mysql.rds.aliyuncs.com:3306/jtest-tool?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://rm-uf6580y08e4zmg2xf.mysql.rds.aliyuncs.com:3306/jtest-tool?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
 
 # pojo属性名转换为数据库可识别的斜划线格式
 mybatis:
