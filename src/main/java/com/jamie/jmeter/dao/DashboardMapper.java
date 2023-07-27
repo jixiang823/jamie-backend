@@ -1,7 +1,6 @@
 package com.jamie.jmeter.dao;
 
 import com.jamie.jmeter.pojo.Dashboard;
-import com.jamie.jmeter.pojo.TestCase;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

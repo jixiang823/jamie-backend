@@ -1,68 +1,77 @@
-2023-07-27 17:25:57,071 INFO o.a.j.u.JMeterUtils: Setting Locale to zh_CN
-2023-07-27 17:25:57,088 INFO o.a.j.JMeter: Loading user properties from: /usr/local/apache-jmeter-5.0/bin/user.properties
-2023-07-27 17:25:57,088 INFO o.a.j.JMeter: Loading system properties from: /usr/local/apache-jmeter-5.0/bin/system.properties
-2023-07-27 17:25:57,093 INFO o.a.j.JMeter: Copyright (c) 1998-2018 The Apache Software Foundation
-2023-07-27 17:25:57,093 INFO o.a.j.JMeter: Version 5.0 r1840935
-2023-07-27 17:25:57,093 INFO o.a.j.JMeter: java.version=1.8.0_192
-2023-07-27 17:25:57,093 INFO o.a.j.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM
-2023-07-27 17:25:57,093 INFO o.a.j.JMeter: os.name=Mac OS X
-2023-07-27 17:25:57,093 INFO o.a.j.JMeter: os.arch=x86_64
-2023-07-27 17:25:57,093 INFO o.a.j.JMeter: os.version=10.16
-2023-07-27 17:25:57,093 INFO o.a.j.JMeter: file.encoding=UTF-8
-2023-07-27 17:25:57,093 INFO o.a.j.JMeter: Max memory     =1073741824
-2023-07-27 17:25:57,093 INFO o.a.j.JMeter: Available Processors =8
-2023-07-27 17:25:57,096 INFO o.a.j.JMeter: Default Locale=English (EN)
-2023-07-27 17:25:57,096 INFO o.a.j.JMeter: JMeter  Locale=Chinese (China)
-2023-07-27 17:25:57,097 INFO o.a.j.JMeter: JMeterHome=/usr/local/apache-jmeter-5.0
-2023-07-27 17:25:57,097 INFO o.a.j.JMeter: user.dir  =/Users/jixiang/Documents/jmeter-report-backend
-2023-07-27 17:25:57,097 INFO o.a.j.JMeter: PWD       =/Users/jixiang/Documents/jmeter-report-backend
-2023-07-27 17:25:57,098 INFO o.a.j.JMeter: IP: 127.0.0.1 Name: jixiangdeMacBook-Pro.local FullName: localhost
-2023-07-27 17:25:57,100 INFO o.a.j.s.FileServer: Default base='/Users/jixiang/Documents/jmeter-report-backend'
-2023-07-27 17:25:57,104 INFO o.a.j.s.FileServer: Set new base='/Users/jixiang/Documents/scripts/qa/mall'
-2023-07-27 17:25:57,199 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
-2023-07-27 17:25:57,210 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
-2023-07-27 17:25:57,213 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
-2023-07-27 17:25:57,217 INFO o.a.j.s.SaveService: Loading file: /Users/jixiang/Documents/scripts/qa/mall/script4.jmx
-2023-07-27 17:25:57,245 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
-2023-07-27 17:25:57,245 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to utf-8
-2023-07-27 17:25:57,245 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
-2023-07-27 17:25:57,245 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
-2023-07-27 17:25:57,266 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2023-07-27 17:25:57,267 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2023-07-27 17:25:57,267 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2023-07-27 17:25:57,267 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2023-07-27 17:25:57,267 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
-2023-07-27 17:25:57,267 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
-2023-07-27 17:25:57,290 INFO o.a.j.JMeter: Creating summariser <summary>
-2023-07-27 17:25:57,294 INFO o.a.j.e.StandardJMeterEngine: Running the test!
-2023-07-27 17:25:57,295 INFO o.a.j.s.SampleEvent: List of sample_variables: []
-2023-07-27 17:25:57,295 INFO o.a.j.s.SampleEvent: List of sample_variables: []
-2023-07-27 17:25:57,298 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
-2023-07-27 17:25:57,299 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
-2023-07-27 17:25:57,594 INFO o.a.j.v.b.BackendListener: 后端监听器: Starting worker with class: class com.jamie.jmeter.listener.JMeterReportBackendListener and queue capacity: 5000
-2023-07-27 17:25:57,595 INFO o.a.j.v.b.BackendListener: 后端监听器: Started  worker with class: class com.jamie.jmeter.listener.JMeterReportBackendListener
-2023-07-27 17:25:57,596 INFO o.a.j.JMeter: 正在运行的测试 (1690449957596)
-2023-07-27 17:25:57,621 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : 部门管理模块
-2023-07-27 17:25:57,621 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group 部门管理模块.
-2023-07-27 17:25:57,621 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
-2023-07-27 17:25:57,621 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 perThread=1000.0 delayedStart=false
-2023-07-27 17:25:57,627 INFO o.a.j.t.ThreadGroup: Started thread group number 1
-2023-07-27 17:25:57,627 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
-2023-07-27 17:25:57,630 INFO o.a.j.t.JMeterThread: Thread started: 部门管理模块 1-1
-2023-07-27 17:25:57,646 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = jixiangdeMacBook-Pro.local
-2023-07-27 17:25:57,652 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
-2023-07-27 17:25:57,717 INFO o.a.j.p.h.s.h.LazyLayeredConnectionSocketFactory: Setting up HTTPS TrustAll Socket Factory
-2023-07-27 17:25:57,720 INFO o.a.j.u.JsseSSLManager: Using default SSL protocol: TLS
-2023-07-27 17:25:57,720 INFO o.a.j.u.JsseSSLManager: SSL session context: per-thread
-2023-07-27 17:25:57,858 INFO o.a.j.u.SSLManager: JmeterKeyStore Location:  type JKS
-2023-07-27 17:25:57,859 INFO o.a.j.u.SSLManager: KeyStore created OK
-2023-07-27 17:25:57,859 WARN o.a.j.u.SSLManager: Keystore file not found, loading empty keystore
-2023-07-27 17:26:01,726 INFO o.a.j.t.JMeterThread: Thread is done: 部门管理模块 1-1
-2023-07-27 17:26:01,727 INFO o.a.j.t.JMeterThread: Thread finished: 部门管理模块 1-1
-2023-07-27 17:26:01,728 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
-2023-07-27 17:26:01,728 INFO o.a.j.v.b.BackendListener: Worker ended
-2023-07-27 17:26:01,837 INFO c.j.j.l.JMeterReportBackendListener: 数据发送成功：{}
-2023-07-27 17:26:01,837 INFO c.j.j.l.JMeterReportBackendListener: 测试数据: JMeterReportModel(dashboard=Dashboard(projectName=企业微信, buildEnv=STG, buildType=1, caseNum=5, casePassNum=4, caseFailNum=1, casePassRate=0.80, newlyFailNum=0, keepFailingNum=0, projectStartTime=1690449957595, projectEndTime=1690449961729, projectDuration=4134), testCaseModels=[TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块, caseOwner=大吉, caseName=t_login, caseStepNum=1, caseResult=true, newlyFail=false, keepFailing=false, caseStartTime=1690449957630, caseEndTime=1690449958194, caseDuration=564), caseSteps=[ApiObject(apiName=a_getToken, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/gettoken, requestMethod=GET, requestHeader=Connection: keep-alive
+2023-07-28 02:12:09,527 INFO o.a.j.u.JMeterUtils: Setting Locale to zh_CN
+2023-07-28 02:12:09,548 INFO o.a.j.JMeter: Loading user properties from: /usr/local/apache-jmeter-5.0/bin/user.properties
+2023-07-28 02:12:09,550 INFO o.a.j.JMeter: Loading system properties from: /usr/local/apache-jmeter-5.0/bin/system.properties
+2023-07-28 02:12:09,554 INFO o.a.j.JMeter: Copyright (c) 1998-2018 The Apache Software Foundation
+2023-07-28 02:12:09,554 INFO o.a.j.JMeter: Version 5.0 r1840935
+2023-07-28 02:12:09,554 INFO o.a.j.JMeter: java.version=1.8.0_192
+2023-07-28 02:12:09,554 INFO o.a.j.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+2023-07-28 02:12:09,554 INFO o.a.j.JMeter: os.name=Mac OS X
+2023-07-28 02:12:09,554 INFO o.a.j.JMeter: os.arch=x86_64
+2023-07-28 02:12:09,554 INFO o.a.j.JMeter: os.version=10.16
+2023-07-28 02:12:09,554 INFO o.a.j.JMeter: file.encoding=UTF-8
+2023-07-28 02:12:09,555 INFO o.a.j.JMeter: Max memory     =1073741824
+2023-07-28 02:12:09,555 INFO o.a.j.JMeter: Available Processors =8
+2023-07-28 02:12:09,557 INFO o.a.j.JMeter: Default Locale=English (EN)
+2023-07-28 02:12:09,558 INFO o.a.j.JMeter: JMeter  Locale=Chinese (China)
+2023-07-28 02:12:09,558 INFO o.a.j.JMeter: JMeterHome=/usr/local/apache-jmeter-5.0
+2023-07-28 02:12:09,558 INFO o.a.j.JMeter: user.dir  =/Users/jixiang/Documents/jmeter-report-backend
+2023-07-28 02:12:09,558 INFO o.a.j.JMeter: PWD       =/Users/jixiang/Documents/jmeter-report-backend
+2023-07-28 02:12:09,559 INFO o.a.j.JMeter: IP: 127.0.0.1 Name: jixiangdeMacBook-Pro.local FullName: localhost
+2023-07-28 02:12:09,563 INFO o.a.j.s.FileServer: Default base='/Users/jixiang/Documents/jmeter-report-backend'
+2023-07-28 02:12:09,566 INFO o.a.j.s.FileServer: Set new base='/Users/jixiang/Downloads'
+2023-07-28 02:12:09,663 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2023-07-28 02:12:09,676 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2023-07-28 02:12:09,680 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2023-07-28 02:12:09,685 INFO o.a.j.s.SaveService: Loading file: /Users/jixiang/Downloads/api_auto_test_script.jmx
+2023-07-28 02:12:09,718 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2023-07-28 02:12:09,718 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to utf-8
+2023-07-28 02:12:09,718 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2023-07-28 02:12:09,718 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2023-07-28 02:12:09,746 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-07-28 02:12:09,746 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-07-28 02:12:09,746 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-07-28 02:12:09,746 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-07-28 02:12:09,746 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2023-07-28 02:12:09,746 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2023-07-28 02:12:09,781 INFO o.a.j.JMeter: Creating summariser <summary>
+2023-07-28 02:12:09,785 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2023-07-28 02:12:09,786 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2023-07-28 02:12:09,786 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2023-07-28 02:12:09,792 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2023-07-28 02:12:09,815 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2023-07-28 02:12:10,181 INFO o.a.j.v.b.BackendListener: 后端监听器: Starting worker with class: class com.jamie.jmeter.listener.JMeterReportBackendListener and queue capacity: 5000
+2023-07-28 02:12:10,182 INFO o.a.j.v.b.BackendListener: 后端监听器: Started  worker with class: class com.jamie.jmeter.listener.JMeterReportBackendListener
+2023-07-28 02:12:10,184 INFO o.a.j.JMeter: 正在运行的测试 (1690481530184)
+2023-07-28 02:12:10,213 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : 部门管理模块A
+2023-07-28 02:12:10,214 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group 部门管理模块A.
+2023-07-28 02:12:10,214 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2023-07-28 02:12:10,214 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 perThread=1000.0 delayedStart=false
+2023-07-28 02:12:10,220 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2023-07-28 02:12:10,220 INFO o.a.j.e.StandardJMeterEngine: Waiting for thread group: 部门管理模块A to finish before starting next group
+2023-07-28 02:12:10,223 INFO o.a.j.t.JMeterThread: Thread started: 部门管理模块A 1-1
+2023-07-28 02:12:10,239 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = jixiangdeMacBook-Pro.local
+2023-07-28 02:12:10,244 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2023-07-28 02:12:10,319 INFO o.a.j.p.h.s.h.LazyLayeredConnectionSocketFactory: Setting up HTTPS TrustAll Socket Factory
+2023-07-28 02:12:10,324 INFO o.a.j.u.JsseSSLManager: Using default SSL protocol: TLS
+2023-07-28 02:12:10,324 INFO o.a.j.u.JsseSSLManager: SSL session context: per-thread
+2023-07-28 02:12:10,560 INFO o.a.j.u.SSLManager: JmeterKeyStore Location:  type JKS
+2023-07-28 02:12:10,561 INFO o.a.j.u.SSLManager: KeyStore created OK
+2023-07-28 02:12:10,561 WARN o.a.j.u.SSLManager: Keystore file not found, loading empty keystore
+2023-07-28 02:12:14,392 INFO o.a.j.t.JMeterThread: Thread is done: 部门管理模块A 1-1
+2023-07-28 02:12:14,392 INFO o.a.j.t.JMeterThread: Thread finished: 部门管理模块A 1-1
+2023-07-28 02:12:14,393 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 2 : 部门管理模块B
+2023-07-28 02:12:14,393 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group 部门管理模块B.
+2023-07-28 02:12:14,393 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2023-07-28 02:12:14,394 INFO o.a.j.t.ThreadGroup: Starting thread group... number=2 threads=1 ramp-up=1 perThread=1000.0 delayedStart=false
+2023-07-28 02:12:14,396 INFO o.a.j.t.ThreadGroup: Started thread group number 2
+2023-07-28 02:12:14,396 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2023-07-28 02:12:14,398 INFO o.a.j.t.JMeterThread: Thread started: 部门管理模块B 2-1
+2023-07-28 02:12:18,011 INFO o.a.j.t.JMeterThread: Thread is done: 部门管理模块B 2-1
+2023-07-28 02:12:18,011 INFO o.a.j.t.JMeterThread: Thread finished: 部门管理模块B 2-1
+2023-07-28 02:12:18,011 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2023-07-28 02:12:18,012 INFO o.a.j.v.b.BackendListener: Worker ended
+2023-07-28 02:12:18,560 INFO c.j.j.l.JMeterReportBackendListener: 数据发送成功
+2023-07-28 02:12:18,561 INFO c.j.j.l.JMeterReportBackendListener: 测试数据: JMeterReportModel(dashboard=Dashboard(projectName=企业微信, buildEnv=STG, buildType=1, caseNum=10, casePassNum=8, caseFailNum=2, casePassRate=0.80, newlyFailNum=0, keepFailingNum=0, projectStartTime=1690481530183, projectEndTime=1690481538012, projectDuration=7829), testCaseModels=[TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块A, caseOwner=大吉, caseName=t_login_A, caseStepNum=1, caseResult=true, newlyFail=false, keepFailing=false, caseStartTime=1690481530224, caseEndTime=1690481530902, caseDuration=678), caseSteps=[ApiObject(apiName=a_getToken, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/gettoken, requestMethod=GET, requestHeader=Connection: keep-alive
 Content-Type: application/json
 Host: qyapi.weixin.qq.com
 User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
@@ -73,19 +82,19 @@ GET data:
 
 [no cookies]
 , responseHeader=HTTP/1.1 200 OK
-Date: Thu, 27 Jul 2023 09:25:58 GMT
+Date: Thu, 27 Jul 2023 18:12:11 GMT
 Content-Type: application/json; charset=UTF-8
 Content-Length: 277
 Connection: keep-alive
 Server: nginx
 Error-Code: 0
 Error-Msg: ok
-, responseBody={"errcode":0,"errmsg":"ok","access_token":"G0SCwxM7WueNQ4KixwcgAz6vlkKMT9y749LLwkSqdGB1fx4CQvb1GL5YAoo1iRZHsF8o_HX5l5y-OzQ1RFlYqOcSjYPsi8g5mRtUZJ1tOfUsuA6DRYDxMw_Z0Ylz-vJbgHK7KHrddNy_4h1737NyWRNOhreK-JU-C_WFSZtAgtHX3vbQvvyYrdL2CN9nd6uzRp-SJpFOPYgdVI_J_uAHHQ","expires_in":7200}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690449957697, apiEndTime=1690449958162, apiDuration=465)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块, caseOwner=大吉, caseName=t_create_department, caseStepNum=2, caseResult=true, newlyFail=false, keepFailing=false, caseStartTime=1690449958194, caseEndTime=1690449958923, caseDuration=729), caseSteps=[ApiObject(apiName=a_createDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/create, requestMethod=POST, requestHeader=Connection: keep-alive
+, responseBody={"errcode":0,"errmsg":"ok","access_token":"vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA","expires_in":7200}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481530290, apiEndTime=1690481530871, apiDuration=581)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块A, caseOwner=大吉, caseName=t_create_department_A, caseStepNum=2, caseResult=true, newlyFail=false, keepFailing=false, caseStartTime=1690481530902, caseEndTime=1690481531627, caseDuration=725), caseSteps=[ApiObject(apiName=a_createDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/create, requestMethod=POST, requestHeader=Connection: keep-alive
 Content-Type: application/json
 Content-Length: 97
 Host: qyapi.weixin.qq.com
 User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
-, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=G0SCwxM7WueNQ4KixwcgAz6vlkKMT9y749LLwkSqdGB1fx4CQvb1GL5YAoo1iRZHsF8o_HX5l5y-OzQ1RFlYqOcSjYPsi8g5mRtUZJ1tOfUsuA6DRYDxMw_Z0Ylz-vJbgHK7KHrddNy_4h1737NyWRNOhreK-JU-C_WFSZtAgtHX3vbQvvyYrdL2CN9nd6uzRp-SJpFOPYgdVI_J_uAHHQ
+, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA
 
 POST data:
 {
@@ -98,37 +107,37 @@ POST data:
 
 [no cookies]
 , responseHeader=HTTP/1.1 200 OK
-Date: Thu, 27 Jul 2023 09:25:58 GMT
+Date: Thu, 27 Jul 2023 18:12:11 GMT
 Content-Type: application/json; charset=UTF-8
 Content-Length: 39
 Connection: keep-alive
 Server: nginx
 Error-Code: 0
 Error-Msg: created
-, responseBody={"errcode":0,"errmsg":"created","id":2}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690449958194, apiEndTime=1690449958512, apiDuration=318), ApiObject(apiName=a_deleteDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/delete, requestMethod=GET, requestHeader=Connection: keep-alive
+, responseBody={"errcode":0,"errmsg":"created","id":2}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481530902, apiEndTime=1690481531259, apiDuration=357), ApiObject(apiName=a_deleteDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/delete, requestMethod=GET, requestHeader=Connection: keep-alive
 Content-Type: application/json
 Host: qyapi.weixin.qq.com
 User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
-, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=G0SCwxM7WueNQ4KixwcgAz6vlkKMT9y749LLwkSqdGB1fx4CQvb1GL5YAoo1iRZHsF8o_HX5l5y-OzQ1RFlYqOcSjYPsi8g5mRtUZJ1tOfUsuA6DRYDxMw_Z0Ylz-vJbgHK7KHrddNy_4h1737NyWRNOhreK-JU-C_WFSZtAgtHX3vbQvvyYrdL2CN9nd6uzRp-SJpFOPYgdVI_J_uAHHQ&id=2
+, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA&id=2
 
 GET data:
 
 
 [no cookies]
 , responseHeader=HTTP/1.1 200 OK
-Date: Thu, 27 Jul 2023 09:25:58 GMT
+Date: Thu, 27 Jul 2023 18:12:11 GMT
 Content-Type: application/json; charset=UTF-8
 Content-Length: 32
 Connection: keep-alive
 Server: nginx
 Error-Code: 0
 Error-Msg: deleted
-, responseBody={"errcode":0,"errmsg":"deleted"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690449958513, apiEndTime=1690449958923, apiDuration=410)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块, caseOwner=大吉, caseName=t_delete_department, caseStepNum=2, caseResult=true, newlyFail=false, keepFailing=false, caseStartTime=1690449958923, caseEndTime=1690449959639, caseDuration=716), caseSteps=[ApiObject(apiName=a_createDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/create, requestMethod=POST, requestHeader=Connection: keep-alive
+, responseBody={"errcode":0,"errmsg":"deleted"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481531260, apiEndTime=1690481531627, apiDuration=367)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块A, caseOwner=大吉, caseName=t_delete_department_A, caseStepNum=2, caseResult=true, newlyFail=false, keepFailing=false, caseStartTime=1690481531628, caseEndTime=1690481532343, caseDuration=715), caseSteps=[ApiObject(apiName=a_createDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/create, requestMethod=POST, requestHeader=Connection: keep-alive
 Content-Type: application/json
 Content-Length: 97
 Host: qyapi.weixin.qq.com
 User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
-, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=G0SCwxM7WueNQ4KixwcgAz6vlkKMT9y749LLwkSqdGB1fx4CQvb1GL5YAoo1iRZHsF8o_HX5l5y-OzQ1RFlYqOcSjYPsi8g5mRtUZJ1tOfUsuA6DRYDxMw_Z0Ylz-vJbgHK7KHrddNy_4h1737NyWRNOhreK-JU-C_WFSZtAgtHX3vbQvvyYrdL2CN9nd6uzRp-SJpFOPYgdVI_J_uAHHQ
+, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA
 
 POST data:
 {
@@ -141,37 +150,37 @@ POST data:
 
 [no cookies]
 , responseHeader=HTTP/1.1 200 OK
-Date: Thu, 27 Jul 2023 09:25:59 GMT
+Date: Thu, 27 Jul 2023 18:12:12 GMT
 Content-Type: application/json; charset=UTF-8
 Content-Length: 39
 Connection: keep-alive
 Server: nginx
 Error-Code: 0
 Error-Msg: created
-, responseBody={"errcode":0,"errmsg":"created","id":2}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690449958924, apiEndTime=1690449959228, apiDuration=304), ApiObject(apiName=a_deleteDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/delete, requestMethod=GET, requestHeader=Connection: keep-alive
+, responseBody={"errcode":0,"errmsg":"created","id":2}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481531628, apiEndTime=1690481531940, apiDuration=312), ApiObject(apiName=a_deleteDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/delete, requestMethod=GET, requestHeader=Connection: keep-alive
 Content-Type: application/json
 Host: qyapi.weixin.qq.com
 User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
-, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=G0SCwxM7WueNQ4KixwcgAz6vlkKMT9y749LLwkSqdGB1fx4CQvb1GL5YAoo1iRZHsF8o_HX5l5y-OzQ1RFlYqOcSjYPsi8g5mRtUZJ1tOfUsuA6DRYDxMw_Z0Ylz-vJbgHK7KHrddNy_4h1737NyWRNOhreK-JU-C_WFSZtAgtHX3vbQvvyYrdL2CN9nd6uzRp-SJpFOPYgdVI_J_uAHHQ&id=2
+, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA&id=2
 
 GET data:
 
 
 [no cookies]
 , responseHeader=HTTP/1.1 200 OK
-Date: Thu, 27 Jul 2023 09:25:59 GMT
+Date: Thu, 27 Jul 2023 18:12:12 GMT
 Content-Type: application/json; charset=UTF-8
 Content-Length: 32
 Connection: keep-alive
 Server: nginx
 Error-Code: 0
 Error-Msg: deleted
-, responseBody={"errcode":0,"errmsg":"deleted"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690449959229, apiEndTime=1690449959638, apiDuration=409)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块, caseOwner=大吉, caseName=t_update_department, caseStepNum=3, caseResult=true, newlyFail=false, keepFailing=false, caseStartTime=1690449959639, caseEndTime=1690449960868, caseDuration=1229), caseSteps=[ApiObject(apiName=a_createDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/create, requestMethod=POST, requestHeader=Connection: keep-alive
+, responseBody={"errcode":0,"errmsg":"deleted"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481531941, apiEndTime=1690481532342, apiDuration=401)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块A, caseOwner=大吉, caseName=t_update_department_A, caseStepNum=3, caseResult=true, newlyFail=false, keepFailing=false, caseStartTime=1690481532343, caseEndTime=1690481533571, caseDuration=1228), caseSteps=[ApiObject(apiName=a_createDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/create, requestMethod=POST, requestHeader=Connection: keep-alive
 Content-Type: application/json
 Content-Length: 97
 Host: qyapi.weixin.qq.com
 User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
-, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=G0SCwxM7WueNQ4KixwcgAz6vlkKMT9y749LLwkSqdGB1fx4CQvb1GL5YAoo1iRZHsF8o_HX5l5y-OzQ1RFlYqOcSjYPsi8g5mRtUZJ1tOfUsuA6DRYDxMw_Z0Ylz-vJbgHK7KHrddNy_4h1737NyWRNOhreK-JU-C_WFSZtAgtHX3vbQvvyYrdL2CN9nd6uzRp-SJpFOPYgdVI_J_uAHHQ
+, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA
 
 POST data:
 {
@@ -184,19 +193,19 @@ POST data:
 
 [no cookies]
 , responseHeader=HTTP/1.1 200 OK
-Date: Thu, 27 Jul 2023 09:26:00 GMT
+Date: Thu, 27 Jul 2023 18:12:12 GMT
 Content-Type: application/json; charset=UTF-8
 Content-Length: 39
 Connection: keep-alive
 Server: nginx
 Error-Code: 0
 Error-Msg: created
-, responseBody={"errcode":0,"errmsg":"created","id":2}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690449959640, apiEndTime=1690449960047, apiDuration=407), ApiObject(apiName=a_updateDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/update, requestMethod=POST, requestHeader=Connection: keep-alive
+, responseBody={"errcode":0,"errmsg":"created","id":2}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481532344, apiEndTime=1690481532752, apiDuration=408), ApiObject(apiName=a_updateDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/update, requestMethod=POST, requestHeader=Connection: keep-alive
 Content-Type: application/json
 Content-Length: 104
 Host: qyapi.weixin.qq.com
 User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
-, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/update?access_token=G0SCwxM7WueNQ4KixwcgAz6vlkKMT9y749LLwkSqdGB1fx4CQvb1GL5YAoo1iRZHsF8o_HX5l5y-OzQ1RFlYqOcSjYPsi8g5mRtUZJ1tOfUsuA6DRYDxMw_Z0Ylz-vJbgHK7KHrddNy_4h1737NyWRNOhreK-JU-C_WFSZtAgtHX3vbQvvyYrdL2CN9nd6uzRp-SJpFOPYgdVI_J_uAHHQ
+, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/update?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA
 
 POST data:
 {
@@ -210,37 +219,37 @@ POST data:
 
 [no cookies]
 , responseHeader=HTTP/1.1 200 OK
-Date: Thu, 27 Jul 2023 09:26:00 GMT
+Date: Thu, 27 Jul 2023 18:12:13 GMT
 Content-Type: application/json; charset=UTF-8
 Content-Length: 32
 Connection: keep-alive
 Server: nginx
 Error-Code: 0
 Error-Msg: updated
-, responseBody={"errcode":0,"errmsg":"updated"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690449960048, apiEndTime=1690449960457, apiDuration=409), ApiObject(apiName=a_deleteDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/delete, requestMethod=GET, requestHeader=Connection: keep-alive
+, responseBody={"errcode":0,"errmsg":"updated"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481532753, apiEndTime=1690481533144, apiDuration=391), ApiObject(apiName=a_deleteDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/delete, requestMethod=GET, requestHeader=Connection: keep-alive
 Content-Type: application/json
 Host: qyapi.weixin.qq.com
 User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
-, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=G0SCwxM7WueNQ4KixwcgAz6vlkKMT9y749LLwkSqdGB1fx4CQvb1GL5YAoo1iRZHsF8o_HX5l5y-OzQ1RFlYqOcSjYPsi8g5mRtUZJ1tOfUsuA6DRYDxMw_Z0Ylz-vJbgHK7KHrddNy_4h1737NyWRNOhreK-JU-C_WFSZtAgtHX3vbQvvyYrdL2CN9nd6uzRp-SJpFOPYgdVI_J_uAHHQ&id=2
+, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA&id=2
 
 GET data:
 
 
 [no cookies]
 , responseHeader=HTTP/1.1 200 OK
-Date: Thu, 27 Jul 2023 09:26:00 GMT
+Date: Thu, 27 Jul 2023 18:12:13 GMT
 Content-Type: application/json; charset=UTF-8
 Content-Length: 32
 Connection: keep-alive
 Server: nginx
 Error-Code: 0
 Error-Msg: deleted
-, responseBody={"errcode":0,"errmsg":"deleted"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690449960459, apiEndTime=1690449960867, apiDuration=408)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块, caseOwner=大吉, caseName=t_list_department, caseStepNum=3, caseResult=false, newlyFail=false, keepFailing=false, caseStartTime=1690449960868, caseEndTime=1690449961722, caseDuration=854), caseSteps=[ApiObject(apiName=a_createDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/create, requestMethod=POST, requestHeader=Connection: keep-alive
+, responseBody={"errcode":0,"errmsg":"deleted"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481533146, apiEndTime=1690481533570, apiDuration=424)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块A, caseOwner=大吉, caseName=t_list_department_A, caseStepNum=3, caseResult=false, newlyFail=false, keepFailing=false, caseStartTime=1690481533571, caseEndTime=1690481534391, caseDuration=820), caseSteps=[ApiObject(apiName=a_createDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/create, requestMethod=POST, requestHeader=Connection: keep-alive
 Content-Type: application/json
 Content-Length: 97
 Host: qyapi.weixin.qq.com
 User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
-, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=G0SCwxM7WueNQ4KixwcgAz6vlkKMT9y749LLwkSqdGB1fx4CQvb1GL5YAoo1iRZHsF8o_HX5l5y-OzQ1RFlYqOcSjYPsi8g5mRtUZJ1tOfUsuA6DRYDxMw_Z0Ylz-vJbgHK7KHrddNy_4h1737NyWRNOhreK-JU-C_WFSZtAgtHX3vbQvvyYrdL2CN9nd6uzRp-SJpFOPYgdVI_J_uAHHQ
+, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA
 
 POST data:
 {
@@ -253,49 +262,284 @@ POST data:
 
 [no cookies]
 , responseHeader=HTTP/1.1 200 OK
-Date: Thu, 27 Jul 2023 09:26:01 GMT
+Date: Thu, 27 Jul 2023 18:12:13 GMT
 Content-Type: application/json; charset=UTF-8
 Content-Length: 39
 Connection: keep-alive
 Server: nginx
 Error-Code: 0
 Error-Msg: created
-, responseBody={"errcode":0,"errmsg":"created","id":2}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690449960868, apiEndTime=1690449961277, apiDuration=409), ApiObject(apiName=a_listDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/list, requestMethod=GET, requestHeader=Connection: keep-alive
+, responseBody={"errcode":0,"errmsg":"created","id":2}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481533571, apiEndTime=1690481533858, apiDuration=287), ApiObject(apiName=a_listDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/list, requestMethod=GET, requestHeader=Connection: keep-alive
 Content-Type: application/json
 Host: qyapi.weixin.qq.com
 User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
-, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/list?access_token=G0SCwxM7WueNQ4KixwcgAz6vlkKMT9y749LLwkSqdGB1fx4CQvb1GL5YAoo1iRZHsF8o_HX5l5y-OzQ1RFlYqOcSjYPsi8g5mRtUZJ1tOfUsuA6DRYDxMw_Z0Ylz-vJbgHK7KHrddNy_4h1737NyWRNOhreK-JU-C_WFSZtAgtHX3vbQvvyYrdL2CN9nd6uzRp-SJpFOPYgdVI_J_uAHHQ&id=2
+, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/list?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA&id=2
 
 GET data:
 
 
 [no cookies]
 , responseHeader=HTTP/1.1 200 OK
-Date: Thu, 27 Jul 2023 09:26:01 GMT
+Date: Thu, 27 Jul 2023 18:12:14 GMT
 Content-Type: application/json; charset=UTF-8
 Content-Length: 209
 Connection: keep-alive
 Server: nginx
 Error-Code: 48009
-Error-Msg: api forbidden for contact assistant, hint: [1690449961372880260960110], from ip: 101.228.214.251, more info at https://open.work.weixin.qq.com/devtool/query?e=48009
-, responseBody={"errcode":48009,"errmsg":"api forbidden for contact assistant, hint: [1690449961372880260960110], from ip: 101.228.214.251, more info at https://open.work.weixin.qq.com/devtool/query?e=48009","department":[]}, responseCode=200, assertMessage=JSON断言: Value expected to match regexp '0', but it did not match: '48009'
-, apiResult=false, apiStartTime=1690449961278, apiEndTime=1690449961375, apiDuration=97), ApiObject(apiName=a_deleteDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/delete, requestMethod=GET, requestHeader=Connection: keep-alive
+Error-Msg: api forbidden for contact assistant, hint: [1690481534372880033060050], from ip: 101.228.214.251, more info at https://open.work.weixin.qq.com/devtool/query?e=48009
+, responseBody={"errcode":48009,"errmsg":"api forbidden for contact assistant, hint: [1690481534372880033060050], from ip: 101.228.214.251, more info at https://open.work.weixin.qq.com/devtool/query?e=48009","department":[]}, responseCode=200, assertMessage=JSON断言: Value expected to match regexp '0', but it did not match: '48009'
+, apiResult=false, apiStartTime=1690481533859, apiEndTime=1690481534002, apiDuration=143), ApiObject(apiName=a_deleteDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/delete, requestMethod=GET, requestHeader=Connection: keep-alive
 Content-Type: application/json
 Host: qyapi.weixin.qq.com
 User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
-, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=G0SCwxM7WueNQ4KixwcgAz6vlkKMT9y749LLwkSqdGB1fx4CQvb1GL5YAoo1iRZHsF8o_HX5l5y-OzQ1RFlYqOcSjYPsi8g5mRtUZJ1tOfUsuA6DRYDxMw_Z0Ylz-vJbgHK7KHrddNy_4h1737NyWRNOhreK-JU-C_WFSZtAgtHX3vbQvvyYrdL2CN9nd6uzRp-SJpFOPYgdVI_J_uAHHQ&id=2
+, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA&id=2
 
 GET data:
 
 
 [no cookies]
 , responseHeader=HTTP/1.1 200 OK
-Date: Thu, 27 Jul 2023 09:26:01 GMT
+Date: Thu, 27 Jul 2023 18:12:14 GMT
 Content-Type: application/json; charset=UTF-8
 Content-Length: 32
 Connection: keep-alive
 Server: nginx
 Error-Code: 0
 Error-Msg: deleted
-, responseBody={"errcode":0,"errmsg":"deleted"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690449961377, apiEndTime=1690449961722, apiDuration=345)])])
-2023-07-27 17:26:01,839 INFO o.a.j.r.Summariser: summary =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+, responseBody={"errcode":0,"errmsg":"deleted"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481534004, apiEndTime=1690481534390, apiDuration=386)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块B, caseOwner=大吉, caseName=t_login_B, caseStepNum=1, caseResult=true, newlyFail=false, keepFailing=false, caseStartTime=1690481534399, caseEndTime=1690481534602, caseDuration=203), caseSteps=[ApiObject(apiName=a_getToken, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/gettoken, requestMethod=GET, requestHeader=Connection: keep-alive
+Content-Type: application/json
+Host: qyapi.weixin.qq.com
+User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
+, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=wwd7c03e8731bdd7cc&corpsecret=x_7e8XxklCNakjtqfkgwyPMkYmZNz2VpS-jD5umKHkI
+
+GET data:
+
+
+[no cookies]
+, responseHeader=HTTP/1.1 200 OK
+Date: Thu, 27 Jul 2023 18:12:14 GMT
+Content-Type: application/json; charset=UTF-8
+Content-Length: 277
+Connection: keep-alive
+Server: nginx
+Error-Code: 0
+Error-Msg: ok
+, responseBody={"errcode":0,"errmsg":"ok","access_token":"vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA","expires_in":7200}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481534399, apiEndTime=1690481534602, apiDuration=203)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块B, caseOwner=大吉, caseName=t_create_department_B, caseStepNum=2, caseResult=true, newlyFail=false, keepFailing=false, caseStartTime=1690481534602, caseEndTime=1690481535245, caseDuration=643), caseSteps=[ApiObject(apiName=a_createDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/create, requestMethod=POST, requestHeader=Connection: keep-alive
+Content-Type: application/json
+Content-Length: 97
+Host: qyapi.weixin.qq.com
+User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
+, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA
+
+POST data:
+{
+  "name": "测试仙人",
+  "name_en": "CSXR",
+  "parentid": 1,
+  "order": 1,
+  "id": 2
+}
+
+[no cookies]
+, responseHeader=HTTP/1.1 200 OK
+Date: Thu, 27 Jul 2023 18:12:15 GMT
+Content-Type: application/json; charset=UTF-8
+Content-Length: 39
+Connection: keep-alive
+Server: nginx
+Error-Code: 0
+Error-Msg: created
+, responseBody={"errcode":0,"errmsg":"created","id":2}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481534603, apiEndTime=1690481534895, apiDuration=292), ApiObject(apiName=a_deleteDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/delete, requestMethod=GET, requestHeader=Connection: keep-alive
+Content-Type: application/json
+Host: qyapi.weixin.qq.com
+User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
+, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA&id=2
+
+GET data:
+
+
+[no cookies]
+, responseHeader=HTTP/1.1 200 OK
+Date: Thu, 27 Jul 2023 18:12:15 GMT
+Content-Type: application/json; charset=UTF-8
+Content-Length: 32
+Connection: keep-alive
+Server: nginx
+Error-Code: 0
+Error-Msg: deleted
+, responseBody={"errcode":0,"errmsg":"deleted"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481534897, apiEndTime=1690481535245, apiDuration=348)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块B, caseOwner=大吉, caseName=t_delete_department_B, caseStepNum=2, caseResult=true, newlyFail=false, keepFailing=false, caseStartTime=1690481535246, caseEndTime=1690481536030, caseDuration=784), caseSteps=[ApiObject(apiName=a_createDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/create, requestMethod=POST, requestHeader=Connection: keep-alive
+Content-Type: application/json
+Content-Length: 97
+Host: qyapi.weixin.qq.com
+User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
+, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA
+
+POST data:
+{
+  "name": "测试仙人",
+  "name_en": "CSXR",
+  "parentid": 1,
+  "order": 1,
+  "id": 2
+}
+
+[no cookies]
+, responseHeader=HTTP/1.1 200 OK
+Date: Thu, 27 Jul 2023 18:12:15 GMT
+Content-Type: application/json; charset=UTF-8
+Content-Length: 39
+Connection: keep-alive
+Server: nginx
+Error-Code: 0
+Error-Msg: created
+, responseBody={"errcode":0,"errmsg":"created","id":2}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481535246, apiEndTime=1690481535619, apiDuration=373), ApiObject(apiName=a_deleteDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/delete, requestMethod=GET, requestHeader=Connection: keep-alive
+Content-Type: application/json
+Host: qyapi.weixin.qq.com
+User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
+, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA&id=2
+
+GET data:
+
+
+[no cookies]
+, responseHeader=HTTP/1.1 200 OK
+Date: Thu, 27 Jul 2023 18:12:16 GMT
+Content-Type: application/json; charset=UTF-8
+Content-Length: 32
+Connection: keep-alive
+Server: nginx
+Error-Code: 0
+Error-Msg: deleted
+, responseBody={"errcode":0,"errmsg":"deleted"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481535620, apiEndTime=1690481536030, apiDuration=410)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块B, caseOwner=大吉, caseName=t_update_department_B, caseStepNum=3, caseResult=true, newlyFail=false, keepFailing=false, caseStartTime=1690481536030, caseEndTime=1690481537220, caseDuration=1190), caseSteps=[ApiObject(apiName=a_createDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/create, requestMethod=POST, requestHeader=Connection: keep-alive
+Content-Type: application/json
+Content-Length: 97
+Host: qyapi.weixin.qq.com
+User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
+, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA
+
+POST data:
+{
+  "name": "测试仙人",
+  "name_en": "CSXR",
+  "parentid": 1,
+  "order": 1,
+  "id": 2
+}
+
+[no cookies]
+, responseHeader=HTTP/1.1 200 OK
+Date: Thu, 27 Jul 2023 18:12:16 GMT
+Content-Type: application/json; charset=UTF-8
+Content-Length: 39
+Connection: keep-alive
+Server: nginx
+Error-Code: 0
+Error-Msg: created
+, responseBody={"errcode":0,"errmsg":"created","id":2}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481536031, apiEndTime=1690481536439, apiDuration=408), ApiObject(apiName=a_updateDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/update, requestMethod=POST, requestHeader=Connection: keep-alive
+Content-Type: application/json
+Content-Length: 104
+Host: qyapi.weixin.qq.com
+User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
+, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/update?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA
+
+POST data:
+{
+   "id": 2,
+   "name": "测试大吉",
+   "name_en": "CSDJ",
+   "parentid": 1,
+   "order": 1
+}
+
+
+[no cookies]
+, responseHeader=HTTP/1.1 200 OK
+Date: Thu, 27 Jul 2023 18:12:16 GMT
+Content-Type: application/json; charset=UTF-8
+Content-Length: 32
+Connection: keep-alive
+Server: nginx
+Error-Code: 0
+Error-Msg: updated
+, responseBody={"errcode":0,"errmsg":"updated"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481536440, apiEndTime=1690481536849, apiDuration=409), ApiObject(apiName=a_deleteDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/delete, requestMethod=GET, requestHeader=Connection: keep-alive
+Content-Type: application/json
+Host: qyapi.weixin.qq.com
+User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
+, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA&id=2
+
+GET data:
+
+
+[no cookies]
+, responseHeader=HTTP/1.1 200 OK
+Date: Thu, 27 Jul 2023 18:12:17 GMT
+Content-Type: application/json; charset=UTF-8
+Content-Length: 32
+Connection: keep-alive
+Server: nginx
+Error-Code: 0
+Error-Msg: deleted
+, responseBody={"errcode":0,"errmsg":"deleted"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481536850, apiEndTime=1690481537220, apiDuration=370)]), TestCaseModel(caseInfo=TestCase(moduleName=部门管理模块B, caseOwner=大吉, caseName=t_list_department_B, caseStepNum=3, caseResult=false, newlyFail=false, keepFailing=false, caseStartTime=1690481537220, caseEndTime=1690481538011, caseDuration=791), caseSteps=[ApiObject(apiName=a_createDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/create, requestMethod=POST, requestHeader=Connection: keep-alive
+Content-Type: application/json
+Content-Length: 97
+Host: qyapi.weixin.qq.com
+User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
+, requestBody=POST https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA
+
+POST data:
+{
+  "name": "测试仙人",
+  "name_en": "CSXR",
+  "parentid": 1,
+  "order": 1,
+  "id": 2
+}
+
+[no cookies]
+, responseHeader=HTTP/1.1 200 OK
+Date: Thu, 27 Jul 2023 18:12:17 GMT
+Content-Type: application/json; charset=UTF-8
+Content-Length: 39
+Connection: keep-alive
+Server: nginx
+Error-Code: 0
+Error-Msg: created
+, responseBody={"errcode":0,"errmsg":"created","id":2}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481537220, apiEndTime=1690481537566, apiDuration=346), ApiObject(apiName=a_listDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/list, requestMethod=GET, requestHeader=Connection: keep-alive
+Content-Type: application/json
+Host: qyapi.weixin.qq.com
+User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
+, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/list?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA&id=2
+
+GET data:
+
+
+[no cookies]
+, responseHeader=HTTP/1.1 200 OK
+Date: Thu, 27 Jul 2023 18:12:17 GMT
+Content-Type: application/json; charset=UTF-8
+Content-Length: 209
+Connection: keep-alive
+Server: nginx
+Error-Code: 48009
+Error-Msg: api forbidden for contact assistant, hint: [1690481537354962297731457], from ip: 101.228.214.251, more info at https://open.work.weixin.qq.com/devtool/query?e=48009
+, responseBody={"errcode":48009,"errmsg":"api forbidden for contact assistant, hint: [1690481537354962297731457], from ip: 101.228.214.251, more info at https://open.work.weixin.qq.com/devtool/query?e=48009","department":[]}, responseCode=200, assertMessage=JSON断言: Value expected to match regexp '0', but it did not match: '48009'
+, apiResult=false, apiStartTime=1690481537567, apiEndTime=1690481537666, apiDuration=99), ApiObject(apiName=a_deleteDepartment, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/department/delete, requestMethod=GET, requestHeader=Connection: keep-alive
+Content-Type: application/json
+Host: qyapi.weixin.qq.com
+User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
+, requestBody=GET https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=vSVbOvVEqafVhE7-vH5DMOX-aX3-54a19pV5PbQMp1dJaglpnWlfNRhrNI8aMC3xTIKlaUJok4F5sNdskKqAqMO6ZWrqaC-KQrOVFTwofGryMcXxfXp6d_ZS9_PLQ6OXQOPd5o0IOXdYwVgQym9wUIeLAeNdt209zGGd7KoCAxUnd77iQZLr8eCXYcZiRWlfumwsMPxHjJ99DYYo2Q1XTA&id=2
+
+GET data:
+
+
+[no cookies]
+, responseHeader=HTTP/1.1 200 OK
+Date: Thu, 27 Jul 2023 18:12:18 GMT
+Content-Type: application/json; charset=UTF-8
+Content-Length: 32
+Connection: keep-alive
+Server: nginx
+Error-Code: 0
+Error-Msg: deleted
+, responseBody={"errcode":0,"errmsg":"deleted"}, responseCode=200, assertMessage=, apiResult=true, apiStartTime=1690481537666, apiEndTime=1690481538011, apiDuration=345)])])
+2023-07-28 02:12:18,563 INFO o.a.j.r.Summariser: summary =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
