@@ -85,6 +85,15 @@
     from tb_dashboard
     order by id desc limit 0,1
   </select>
+  <select id="selectSameBatch" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from
+      tb_dashboard
+    order by
+      id desc
+      limit 0,#{pageSize}
+  </select>
   <select id="selectMaxBatchNo" resultType="string">
     select batch_no
     from tb_dashboard
@@ -278,5 +287,14 @@
       project_end_time = #{projectEndTime,jdbcType=BIGINT},
       project_duration = #{projectDuration,jdbcType=BIGINT}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--批量更新-->
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+      update tb_dashboard
+      set
+      batch_no = #{item.batchNo}
+      where id = #{item.id}
+    </foreach>
   </update>
 </mapper>

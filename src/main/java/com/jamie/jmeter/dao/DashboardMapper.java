@@ -1,6 +1,8 @@
 package com.jamie.jmeter.dao;
 
 import com.jamie.jmeter.pojo.Dashboard;
+import com.jamie.jmeter.pojo.TestCase;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,8 @@ public interface DashboardMapper {
 
     Dashboard selectLatest(); // 查询最新的看板数据
 
+    List<Dashboard> selectSameBatch(@Param("pageSize") Integer pageSize); // 查询最新的看板数据(指定数量) 用于更新batch_no为同一批次
+
     String selectMaxBatchNo(); // 查询当日最大批次号
 
     List<Map<String,String>> selectFailCaseHistoryResults(String batchNo); // 获取最新执行失败用例的历史测试结果
@@ -33,4 +37,6 @@ public interface DashboardMapper {
     int updateByPrimaryKeySelective(Dashboard row);
 
     int updateByPrimaryKey(Dashboard row);
+
+    int updateBatch(List<Dashboard> dashboards); // 批量更新
 }

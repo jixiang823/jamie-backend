@@ -11,7 +11,7 @@ import com.jamie.jmeter.vo.ResponseVo;
 import java.util.List;
 import java.util.Map;
 
-public interface IJMeterReportModelService {
+public interface ITestReportService {
 
     void save(String reportData); // JMeter测试结果入库
 

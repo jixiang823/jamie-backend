@@ -3,9 +3,8 @@ package com.jamie.jmeter.controller;
 import com.github.pagehelper.PageInfo;
 import com.jamie.jmeter.pojo.ApiObject;
 import com.jamie.jmeter.pojo.Dashboard;
-import com.jamie.jmeter.service.IProcessService;
 import com.jamie.jmeter.vo.TableVo;
-import com.jamie.jmeter.service.IJMeterReportModelService;
+import com.jamie.jmeter.service.ITestReportService;
 import com.jamie.jmeter.vo.PanelGroupVo;
 import com.jamie.jmeter.vo.ResponseVo;
 import com.jamie.jmeter.vo.TestcaseFilterVo;
@@ -16,12 +15,10 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class JMeterReportModelController {
+public class TestReportController {
 
     @Resource
-    private IJMeterReportModelService jMeterReportModelService;
-    @Resource
-    private IProcessService processService;
+    private ITestReportService jMeterReportModelService;
 
     // 存储JMeter测试结果,由backend-listener调用. (TODO 之后单独弄一个controller)
     @PostMapping("/jmeter/report/save")
@@ -75,13 +72,6 @@ public class JMeterReportModelController {
     @PostMapping("/jmeter/report/list")
     public ResponseVo<PageInfo<TableVo>> list(@RequestBody TestcaseFilterVo testcaseFilterVo) {
         return jMeterReportModelService.list(testcaseFilterVo);
-    }
-
-    // 命令行执行jmeter脚本
-    @PostMapping("/jmeter/report/run")
-    public ResponseVo<String> runJmx(@RequestBody Map<String,String> scripts) {
-        String s = processService.runProcess(scripts.get("script"));
-        return ResponseVo.success(s);
     }
 
 }

@@ -13,7 +13,7 @@ import com.jamie.jmeter.pojo.ApiObject;
 import com.jamie.jmeter.pojo.Dashboard;
 import com.jamie.jmeter.vo.TableVo;
 import com.jamie.jmeter.pojo.TestCase;
-import com.jamie.jmeter.service.IJMeterReportModelService;
+import com.jamie.jmeter.service.ITestReportService;
 import com.jamie.jmeter.utils.GsonUtil;
 import com.jamie.jmeter.vo.PanelGroupVo;
 import com.jamie.jmeter.vo.TestcaseFilterVo;
@@ -30,7 +30,7 @@ import java.util.*;
 @Slf4j
 @Service
 @Transactional
-public class JMeterReportModelServiceImpl implements IJMeterReportModelService {
+public class TestReportServiceImpl implements ITestReportService {
 
     @Resource
     private ApiObjectMapper apiObjectMapper;
