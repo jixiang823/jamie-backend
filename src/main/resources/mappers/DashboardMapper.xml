@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.jamie.jmeter.pojo.Dashboard">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
-    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="feature_name" jdbcType="VARCHAR" property="featureName" />
     <result column="build_env" jdbcType="VARCHAR" property="buildEnv" />
     <result column="build_type" jdbcType="INTEGER" property="buildType" />
     <result column="case_num" jdbcType="INTEGER" property="caseNum" />
@@ -13,13 +13,13 @@
     <result column="case_pass_rate" jdbcType="DECIMAL" property="casePassRate" />
     <result column="newly_fail_num" jdbcType="INTEGER" property="newlyFailNum" />
     <result column="keep_failing_num" jdbcType="INTEGER" property="keepFailingNum" />
-    <result column="project_start_time" jdbcType="BIGINT" property="projectStartTime" />
-    <result column="project_end_time" jdbcType="BIGINT" property="projectEndTime" />
-    <result column="project_duration" jdbcType="BIGINT" property="projectDuration" />
+    <result column="start_time" jdbcType="BIGINT" property="startTime" />
+    <result column="end_time" jdbcType="BIGINT" property="endTime" />
+    <result column="duration" jdbcType="BIGINT" property="duration" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, batch_no, project_name, build_env, build_type, case_num, case_pass_num, case_fail_num, case_pass_rate,
-    newly_fail_num, keep_failing_num, project_start_time, project_end_time, project_duration
+    id, batch_no, feature_name, build_env, build_type, case_num, case_pass_num, case_fail_num, case_pass_rate,
+    newly_fail_num, keep_failing_num, start_time, end_time, duration
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -124,16 +124,16 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jamie.jmeter.pojo.Dashboard">
-    insert into tb_dashboard (id, batch_no, project_name, 
+    insert into tb_dashboard (id, batch_no, feature_name,
       build_env, build_type, case_num,
       case_pass_num, case_fail_num, case_pass_rate, 
-      newly_fail_num, keep_failing_num, project_start_time, 
-      project_end_time, project_duration)
-    values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, 
+      newly_fail_num, keep_failing_num, start_time,
+      end_time, duration)
+    values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{featureName,jdbcType=VARCHAR},
       #{buildEnv,jdbcType=VARCHAR}, #{buildType,jdbcType=INTEGER}, #{caseNum,jdbcType=INTEGER},
       #{casePassNum,jdbcType=INTEGER}, #{caseFailNum,jdbcType=INTEGER}, #{casePassRate,jdbcType=DECIMAL},
-      #{newlyFailNum,jdbcType=INTEGER}, #{keepFailingNum,jdbcType=INTEGER}, #{projectStartTime,jdbcType=BIGINT}, 
-      #{projectEndTime,jdbcType=BIGINT}, #{projectDuration,jdbcType=BIGINT})
+      #{newlyFailNum,jdbcType=INTEGER}, #{keepFailingNum,jdbcType=INTEGER}, #{startTime,jdbcType=BIGINT},
+      #{endTime,jdbcType=BIGINT}, #{duration,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.jamie.jmeter.pojo.Dashboard">
     insert into tb_dashboard
@@ -144,8 +144,8 @@
       <if test="batchNo != null">
         batch_no,
       </if>
-      <if test="projectName != null">
-        project_name,
+      <if test="featureName != null">
+        feature_name,
       </if>
       <if test="buildEnv != null">
         build_env,
@@ -172,13 +172,13 @@
         keep_failing_num,
       </if>
       <if test="projectStartTime != null">
-        project_start_time,
+        start_time,
       </if>
       <if test="projectEndTime != null">
-        project_end_time,
+        end_time,
       </if>
       <if test="projectDuration != null">
-        project_duration,
+        duration,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -188,8 +188,8 @@
       <if test="batchNo != null">
         #{batchNo,jdbcType=VARCHAR},
       </if>
-      <if test="projectName != null">
-        #{projectName,jdbcType=VARCHAR},
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
       </if>
       <if test="buildEnv != null">
         #{buildEnv,jdbcType=VARCHAR},
@@ -215,14 +215,14 @@
       <if test="keepFailingNum != null">
         #{keepFailingNum,jdbcType=INTEGER},
       </if>
-      <if test="projectStartTime != null">
-        #{projectStartTime,jdbcType=BIGINT},
+      <if test="startTime != null">
+        #{startTime,jdbcType=BIGINT},
       </if>
-      <if test="projectEndTime != null">
-        #{projectEndTime,jdbcType=BIGINT},
+      <if test="endTime != null">
+        #{endTime,jdbcType=BIGINT},
       </if>
-      <if test="projectDuration != null">
-        #{projectDuration,jdbcType=BIGINT},
+      <if test="duration != null">
+        #{duration,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -232,8 +232,8 @@
       <if test="batchNo != null">
         batch_no = #{batchNo,jdbcType=VARCHAR},
       </if>
-      <if test="projectName != null">
-        project_name = #{projectName,jdbcType=VARCHAR},
+      <if test="featureName != null">
+        feature_name = #{featureName,jdbcType=VARCHAR},
       </if>
       <if test="buildEnv != null">
         build_env = #{buildEnv,jdbcType=VARCHAR},
@@ -259,14 +259,14 @@
       <if test="keepFailingNum != null">
         keep_failing_num = #{keepFailingNum,jdbcType=INTEGER},
       </if>
-      <if test="projectStartTime != null">
-        project_start_time = #{projectStartTime,jdbcType=BIGINT},
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=BIGINT},
       </if>
-      <if test="projectEndTime != null">
-        project_end_time = #{projectEndTime,jdbcType=BIGINT},
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=BIGINT},
       </if>
-      <if test="projectDuration != null">
-        project_duration = #{projectDuration,jdbcType=BIGINT},
+      <if test="duration != null">
+        duration = #{duration,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -274,7 +274,7 @@
   <update id="updateByPrimaryKey" parameterType="com.jamie.jmeter.pojo.Dashboard">
     update tb_dashboard
     set batch_no = #{batchNo,jdbcType=VARCHAR},
-      project_name = #{projectName,jdbcType=VARCHAR},
+      feature_name = #{featureName,jdbcType=VARCHAR},
       build_env = #{buildEnv,jdbcType=VARCHAR},
       build_type = #{buildType,jdbcType=INTEGER},
       case_num = #{caseNum,jdbcType=INTEGER},
@@ -283,9 +283,9 @@
       case_pass_rate = #{casePassRate,jdbcType=DECIMAL},
       newly_fail_num = #{newlyFailNum,jdbcType=INTEGER},
       keep_failing_num = #{keepFailingNum,jdbcType=INTEGER},
-      project_start_time = #{projectStartTime,jdbcType=BIGINT},
-      project_end_time = #{projectEndTime,jdbcType=BIGINT},
-      project_duration = #{projectDuration,jdbcType=BIGINT}
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
+      duration = #{duration,jdbcType=BIGINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <!--批量更新-->

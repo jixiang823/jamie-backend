@@ -19,8 +19,8 @@ public class ApiObject {
     private String responseCode;
     private String assertMessage;
     private Boolean apiResult;
-    private Long apiStartTime;
-    private Long apiEndTime;
-    private Long apiDuration;
+    private Long startTime;
+    private Long endTime;
+    private Long duration;
 
 }

@@ -9,7 +9,7 @@ public class Dashboard {
 
     private Integer id;
     private String batchNo;
-    private String projectName;
+    private String featureName;
     private String buildEnv;
     private Integer buildType;
     private Integer caseNum;
@@ -18,8 +18,8 @@ public class Dashboard {
     private BigDecimal casePassRate;
     private Integer newlyFailNum;
     private Integer keepFailingNum;
-    private Long projectStartTime;
-    private Long projectEndTime;
-    private Long projectDuration;
+    private Long startTime;
+    private Long endTime;
+    private Long duration;
 
 }

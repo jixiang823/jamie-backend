@@ -305,8 +305,8 @@ public class TestReportServiceImpl implements ITestReportService {
         }
         Map<String, Object> queryKeywords = new HashMap<>();
         queryKeywords.put("batchNo", testcaseFilterVo.getBatchNo());
+        queryKeywords.put("storyName", testcaseFilterVo.getStoryName());
         queryKeywords.put("caseName", testcaseFilterVo.getCaseName());
-        queryKeywords.put("moduleName", testcaseFilterVo.getModuleName());
         queryKeywords.put("caseOwner", testcaseFilterVo.getCaseOwner());
         queryKeywords.put("caseResult", testcaseFilterVo.getCaseResult());
         queryKeywords.put("sort", testcaseFilterVo.getSort());

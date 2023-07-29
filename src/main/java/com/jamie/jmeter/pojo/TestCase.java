@@ -7,15 +7,15 @@ public class TestCase {
 
     private Integer id;
     private String batchNo;
+    private String storyName;
     private String caseName;
-    private String moduleName;
     private String caseOwner;
     private Integer caseStepNum;
     private Boolean caseResult;
     private Boolean newlyFail;
     private Boolean keepFailing;
-    private Long caseStartTime;
-    private Long caseEndTime;
-    private Long caseDuration;
+    private Long startTime;
+    private Long endTime;
+    private Long duration;
 
 }

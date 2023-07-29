@@ -4,38 +4,38 @@
   <resultMap id="BaseResultMap" type="com.jamie.jmeter.pojo.TestCase">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
+    <result column="story_name" jdbcType="VARCHAR" property="storyName" />
     <result column="case_name" jdbcType="VARCHAR" property="caseName" />
-    <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
     <result column="case_owner" jdbcType="VARCHAR" property="caseOwner" />
     <result column="case_step_num" jdbcType="INTEGER" property="caseStepNum" />
     <result column="case_result" jdbcType="BOOLEAN" property="caseResult" />
     <result column="newly_fail" jdbcType="BOOLEAN" property="newlyFail" />
     <result column="keep_failing" jdbcType="BOOLEAN" property="keepFailing" />
-    <result column="case_start_time" jdbcType="BIGINT" property="caseStartTime" />
-    <result column="case_end_time" jdbcType="BIGINT" property="caseEndTime" />
-    <result column="case_duration" jdbcType="BIGINT" property="caseDuration" />
+    <result column="start_time" jdbcType="BIGINT" property="startTime" />
+    <result column="end_time" jdbcType="BIGINT" property="endTime" />
+    <result column="duration" jdbcType="BIGINT" property="duration" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, batch_no, case_name, module_name, case_owner, case_step_num, case_result, newly_fail, keep_failing, case_start_time,
-    case_end_time, case_duration
+    id, batch_no, story_name, case_name, case_owner, case_step_num, case_result, newly_fail, keep_failing, start_time,
+    end_time, duration
   </sql>
   <sql id="latestBatchNo">
     select batch_no from tb_testcase order by id desc limit 0,1
   </sql>
   <select id="selectLatest" resultType="com.jamie.jmeter.vo.TableVo">
     select tb_dashboard.batch_no,
-           tb_dashboard.project_name,
+           tb_dashboard.feature_name,
            tb_dashboard.build_env,
            tb_testcase.id,
+           tb_testcase.story_name,
            tb_testcase.case_name,
-           tb_testcase.module_name,
            tb_testcase.case_owner,
            tb_testcase.case_step_num,
            tb_testcase.case_result,
            tb_testcase.newly_fail,
            tb_testcase.keep_failing,
-           tb_testcase.case_start_time,
-           tb_testcase.case_duration
+           tb_testcase.start_time,
+           tb_testcase.duration
     from tb_testcase,
          tb_dashboard
     where tb_testcase.batch_no = (select batch_no from tb_testcase order by id desc limit 0,1) and tb_dashboard.batch_no = tb_testcase.batch_no
@@ -51,18 +51,18 @@
   <select id="page" resultType="com.jamie.jmeter.vo.TableVo" parameterType="java.util.Map">
     select
     tb_dashboard.batch_no,
-    tb_dashboard.project_name,
+    tb_dashboard.feature_name,
     tb_dashboard.build_env,
     tb_testcase.id,
+    tb_testcase.story_name,
     tb_testcase.case_name,
-    tb_testcase.module_name,
     tb_testcase.case_owner,
     tb_testcase.case_step_num,
     tb_testcase.case_result,
     tb_testcase.newly_fail,
     tb_testcase.keep_failing,
-    tb_testcase.case_start_time,
-    tb_testcase.case_duration
+    tb_testcase.start_time,
+    tb_testcase.duration
     from
     tb_testcase,tb_dashboard
     <where>
@@ -72,11 +72,11 @@
       <if test="1 == 1">
         and tb_dashboard.batch_no = tb_testcase.batch_no
       </if>
+      <if test="storyName != null and storyName != ''">
+        and story_name like concat('%',#{storyName},'%')
+      </if>
       <if test="caseName != null and caseName != ''">
         and case_name like concat('%',#{caseName},'%')
-      </if>
-      <if test="moduleName != null and moduleName != ''">
-        and module_name like concat('%',#{moduleName},'%')
       </if>
       <if test="caseOwner != null and caseOwner != ''">
         and case_owner like concat('%',#{caseOwner},'%')
@@ -105,32 +105,32 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jamie.jmeter.pojo.TestCase" useGeneratedKeys="true" keyProperty="id">
-    insert into tb_testcase (id, batch_no, case_name, 
-      module_name, case_owner, case_step_num, 
-      case_result, newly_fail, keep_failing, case_start_time, case_end_time,
-      case_duration)
-    values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{caseName,jdbcType=VARCHAR}, 
-      #{moduleName,jdbcType=VARCHAR}, #{caseOwner,jdbcType=VARCHAR}, #{caseStepNum,jdbcType=INTEGER}, 
-      #{caseResult,jdbcType=BOOLEAN}, #{newlyFail,jdbcType=BOOLEAN}, #{keepFailing,jdbcType=BOOLEAN}, #{caseStartTime,jdbcType=BIGINT}, #{caseEndTime,jdbcType=BIGINT},
-      #{caseDuration,jdbcType=BIGINT})
+    insert into tb_testcase (id, batch_no, story_name,
+      case_name, case_owner, case_step_num,
+      case_result, newly_fail, keep_failing, start_time, end_time,
+      duration)
+    values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{storyName,jdbcType=VARCHAR},
+      #{caseName,jdbcType=VARCHAR}, #{caseOwner,jdbcType=VARCHAR}, #{caseStepNum,jdbcType=INTEGER},
+      #{caseResult,jdbcType=BOOLEAN}, #{newlyFail,jdbcType=BOOLEAN}, #{keepFailing,jdbcType=BOOLEAN}, #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT},
+      #{duration,jdbcType=BIGINT})
   </insert>
   <insert id="batchInsert" parameterType="list">
-    insert into tb_testcase (batch_no, case_name, module_name, case_owner, case_step_num, case_result, newly_fail, keep_failing, case_start_time,
-    case_end_time, case_duration)
+    insert into tb_testcase (batch_no, story_name, case_name, case_owner, case_step_num, case_result, newly_fail, keep_failing, start_time,
+    end_time, duration)
     values
     <foreach collection="caseInfoList" index="index" item="caseInfo" separator=",">
       (
       #{caseInfo.batchNo},
+      #{caseInfo.storyName},
       #{caseInfo.caseName},
-      #{caseInfo.moduleName},
       #{caseInfo.caseOwner},
       #{caseInfo.caseStepNum},
       #{caseInfo.caseResult},
       #{caseInfo.newlyFail},
       #{caseInfo.keepFailing},
-      #{caseInfo.caseStartTime},
-      #{caseInfo.caseEndTime},
-      #{caseInfo.caseDuration}
+      #{caseInfo.startTime},
+      #{caseInfo.endTime},
+      #{caseInfo.duration}
       )
     </foreach>
   </insert>
@@ -148,11 +148,11 @@
       <if test="batchNo != null">
         batch_no,
       </if>
+      <if test="storyName != null">
+        story_name,
+      </if>
       <if test="caseName != null">
         case_name,
-      </if>
-      <if test="moduleName != null">
-        module_name,
       </if>
       <if test="caseOwner != null">
         case_owner,
@@ -169,14 +169,14 @@
       <if test="keepFailing != null">
         keep_failing,
       </if>
-      <if test="caseStartTime != null">
-        case_start_time,
+      <if test="startTime != null">
+        start_time,
       </if>
-      <if test="caseEndTime != null">
-        case_end_time,
+      <if test="endTime != null">
+        end_time,
       </if>
-      <if test="caseDuration != null">
-        case_duration,
+      <if test="duration != null">
+        duration,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -186,11 +186,11 @@
       <if test="batchNo != null">
         #{batchNo,jdbcType=VARCHAR},
       </if>
+      <if test="storyName != null">
+        #{storyName,jdbcType=VARCHAR},
+      </if>
       <if test="caseName != null">
         #{caseName,jdbcType=VARCHAR},
-      </if>
-      <if test="moduleName != null">
-        #{moduleName,jdbcType=VARCHAR},
       </if>
       <if test="caseOwner != null">
         #{caseOwner,jdbcType=VARCHAR},
@@ -207,14 +207,14 @@
       <if test="keepFailing != null">
         #{keepFailing,jdbcType=BOOLEAN},
       </if>
-      <if test="caseStartTime != null">
-        #{caseStartTime,jdbcType=BIGINT},
+      <if test="startTime != null">
+        #{startTime,jdbcType=BIGINT},
       </if>
-      <if test="caseEndTime != null">
-        #{caseEndTime,jdbcType=BIGINT},
+      <if test="endTime != null">
+        #{endTime,jdbcType=BIGINT},
       </if>
-      <if test="caseDuration != null">
-        #{caseDuration,jdbcType=BIGINT},
+      <if test="duration != null">
+        #{duration,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -224,11 +224,11 @@
       <if test="batchNo != null">
         batch_no = #{batchNo,jdbcType=VARCHAR},
       </if>
+      <if test="storyName != null">
+        story_name = #{storyName,jdbcType=VARCHAR},
+      </if>
       <if test="caseName != null">
         case_name = #{caseName,jdbcType=VARCHAR},
-      </if>
-      <if test="moduleName != null">
-        module_name = #{moduleName,jdbcType=VARCHAR},
       </if>
       <if test="caseOwner != null">
         case_owner = #{caseOwner,jdbcType=VARCHAR},
@@ -245,14 +245,14 @@
       <if test="keepFailing != null">
         keep_failing = #{keepFailing,jdbcType=BOOLEAN},
       </if>
-      <if test="caseStartTime != null">
-        case_start_time = #{caseStartTime,jdbcType=BIGINT},
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=BIGINT},
       </if>
-      <if test="caseEndTime != null">
-        case_end_time = #{caseEndTime,jdbcType=BIGINT},
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=BIGINT},
       </if>
-      <if test="caseDuration != null">
-        case_duration = #{caseDuration,jdbcType=BIGINT},
+      <if test="duration != null">
+        duration = #{duration,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -260,16 +260,16 @@
   <update id="updateByPrimaryKey" parameterType="com.jamie.jmeter.pojo.TestCase">
     update tb_testcase
     set batch_no        = #{batchNo,jdbcType=VARCHAR},
+        story_name     = #{storyName,jdbcType=VARCHAR},
         case_name       = #{caseName,jdbcType=VARCHAR},
-        module_name     = #{moduleName,jdbcType=VARCHAR},
         case_owner      = #{caseOwner,jdbcType=VARCHAR},
         case_step_num   = #{caseStepNum,jdbcType=INTEGER},
         case_result     = #{caseResult,jdbcType=BOOLEAN},
         newly_fail     = #{newlyFail,jdbcType=BOOLEAN},
         keep_failing     = #{keepFailing,jdbcType=BOOLEAN},
-        case_start_time = #{caseStartTime,jdbcType=BIGINT},
-        case_end_time   = #{caseEndTime,jdbcType=BIGINT},
-        case_duration   = #{caseDuration,jdbcType=BIGINT}
+        start_time = #{startTime,jdbcType=BIGINT},
+        end_time   = #{endTime,jdbcType=BIGINT},
+        duration   = #{duration,jdbcType=BIGINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 <!--批量更新-->
