@@ -27,9 +27,9 @@ public interface DashboardMapper {
 
     Dashboard selectLatest(); // 查询最新的看板数据
 
-    List<Dashboard> selectSameBatch(@Param("pageSize") Integer pageSize); // 查询最新的看板数据(指定数量) 用于更新batch_no为同一批次
+//    List<Dashboard> selectSameBatch(@Param("pageSize") Integer pageSize); // 废弃 查询最新的看板数据(指定数量) 用于更新batch_no为同一批次
 
-    String selectMaxBatchNo(); // 查询当日最大批次号
+    String selectMaxBatchNo(); // 获取最新批次号
 
     List<Map<String,String>> selectFailCaseHistoryResults(String batchNo); // 获取最新执行失败用例的历史测试结果
 

@@ -224,7 +224,7 @@ public class TestReportServiceImpl implements ITestReportService {
     @Override
     public ResponseVo<List<TableVo>> latestList() {
         List<TableVo> tableList = testcaseMapper.selectLatest();
-        if (tableList.size() == 0) {
+        if (tableList.isEmpty()) {
             return ResponseVo.error(ResponseEnum.ARGUMENT_NOT_EXIST);
         }
         return ResponseVo.success(tableList);
@@ -237,7 +237,7 @@ public class TestReportServiceImpl implements ITestReportService {
     @Override
     public ResponseVo<List<Map<String, Integer>>> getCaseResultTrend() {
         List<Map<String, Integer>> caseResultList = dashboardMapper.selectCaseResultTrend();
-        if (caseResultList.size() == 0) {
+        if (caseResultList.isEmpty()) {
             return ResponseVo.error(ResponseEnum.ARGUMENT_NOT_EXIST);
         }
         return ResponseVo.success(caseResultList);
@@ -253,25 +253,25 @@ public class TestReportServiceImpl implements ITestReportService {
         PanelGroupVo panelGroupVo = new PanelGroupVo();
 
         List<Map<String, Integer>> totalPassList = dashboardMapper.selectCaseTotalPassTrend();
-        if (totalPassList.size() == 0) {
+        if (totalPassList.isEmpty()) {
             return ResponseVo.error(ResponseEnum.ARGUMENT_NOT_EXIST);
         }
         panelGroupVo.setTotalPass(totalPassList);
 
         List<Map<String, Integer>> totalFailList = dashboardMapper.selectCaseTotalFailTrend();
-        if (totalFailList.size() == 0) {
+        if (totalFailList.isEmpty()) {
             return ResponseVo.error(ResponseEnum.ARGUMENT_NOT_EXIST);
         }
         panelGroupVo.setTotalFail(totalFailList);
 
         List<Map<String, Integer>> newlyFailList = dashboardMapper.selectCaseNewlyFailTrend();
-        if (newlyFailList.size() == 0) {
+        if (newlyFailList.isEmpty()) {
             return ResponseVo.error(ResponseEnum.ARGUMENT_NOT_EXIST);
         }
         panelGroupVo.setNewlyFail(newlyFailList);
 
         List<Map<String, Integer>> keepFailingList = dashboardMapper.selectCaseKeepFailingTrend();
-        if (keepFailingList.size() == 0) {
+        if (keepFailingList.isEmpty()) {
             return ResponseVo.error(ResponseEnum.ARGUMENT_NOT_EXIST);
         }
         panelGroupVo.setKeepFailing(keepFailingList);
@@ -326,7 +326,7 @@ public class TestReportServiceImpl implements ITestReportService {
     @Override
     public ResponseVo<List<ApiObject>> steps(Integer caseId) {
         List<ApiObject> apiObjects = apiObjectMapper.selectByCaseId(caseId);
-        if (apiObjects.size() == 0) {
+        if (apiObjects.isEmpty()) {
             return ResponseVo.error(ResponseEnum.ARGUMENT_NOT_EXIST);
         }
         return ResponseVo.success(apiObjects);

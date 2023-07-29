@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Semaphore;
 
 @Service
@@ -17,7 +19,7 @@ public class TestScriptServiceImpl implements ITestScriptService {
     Semaphore semaphore = new Semaphore(1);
 
     @Override
-    public String runScript() {
+    public String runScript(String scriptPath) {
 
         if (isSomeProcessRun) {
             return "有程序正在运行,无法启动";
@@ -25,7 +27,7 @@ public class TestScriptServiceImpl implements ITestScriptService {
         try {
             isSomeProcessRun = true;
             semaphore.acquire();
-            run();
+            run(scriptPath);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -33,11 +35,17 @@ public class TestScriptServiceImpl implements ITestScriptService {
 
     }
 
-    protected void run() {
+    protected void run(String scriptPath) {
         Thread thread = new Thread(() -> {
-            StringBuilder sb = new StringBuilder();
-            ProcessBuilder processBuilder = new ProcessBuilder();
-            processBuilder.command("scripts.sh");
+            // 日志记录
+            StringBuilder scriptLog = new StringBuilder();
+            // shell命令执行jmx脚本
+            List<String> commandList = new ArrayList<>();
+            commandList .add("jmeter");
+            commandList .add("-n");
+            commandList .add("-t");
+            commandList .add(scriptPath); // 所在服务器的路径
+            ProcessBuilder processBuilder = new ProcessBuilder(commandList);
             processBuilder.redirectErrorStream(true);
             try {
                 Process start = processBuilder.start();
@@ -46,12 +54,12 @@ public class TestScriptServiceImpl implements ITestScriptService {
                 char[] chs = new char[1024];
                 int len;
                 while ((len = inputStreamReader.read(chs)) != -1) {
-                    sb.append(new String(chs, 0, len));
+                    scriptLog.append(new String(chs, 0, len));
                 }
                 //阻塞当前线程，直到进程退出为止
                 start.waitFor();
                 if (start.exitValue() == 0) {
-                    log.info("进程正常结束 {}", sb);
+                    log.info("进程正常结束 {}", scriptLog);
                 } else {
                     log.info("进程异常结束");
                 }

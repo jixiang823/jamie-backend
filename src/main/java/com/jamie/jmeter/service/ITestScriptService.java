@@ -1,6 +1,6 @@
 package com.jamie.jmeter.service;
 
 public interface ITestScriptService {
-    String runScript();
+    String runScript(String scriptPath);
 
 }

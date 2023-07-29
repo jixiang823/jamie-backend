@@ -85,15 +85,15 @@
     from tb_dashboard
     order by id desc limit 0,1
   </select>
-  <select id="selectSameBatch" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from
-      tb_dashboard
-    order by
-      id desc
-      limit 0,#{pageSize}
-  </select>
+<!--  <select id="selectSameBatch" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from-->
+<!--      tb_dashboard-->
+<!--    order by-->
+<!--      id desc-->
+<!--      limit 0,#{pageSize}-->
+<!--  </select>-->
   <select id="selectMaxBatchNo" resultType="string">
     select batch_no
     from tb_dashboard
