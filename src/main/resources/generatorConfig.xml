@@ -45,8 +45,8 @@
         </javaClientGenerator>
 
         <!--需要生成的table表名 mvn mybatis-generator:generate-->
-        <table tableName="tb_apiobject"
-               domainObjectName="ApiObject"
+        <table tableName="tb_user"
+               domainObjectName="User"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
