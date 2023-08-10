@@ -79,11 +79,31 @@
       batch_no desc
       limit 0,7
   </select>
-  <select id="selectLatest" resultMap="BaseResultMap">
+  <select id="selectLatestSummary" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tb_dashboard
     order by id desc limit 0,1
+  </select>
+  <select id="selectLatestCaseList" resultType="com.jamie.jmeter.vo.TableVo">
+    select tb_dashboard.batch_no,
+           tb_dashboard.feature_name,
+           tb_dashboard.build_env,
+           tb_testcase.id,
+           tb_testcase.story_name,
+           tb_testcase.case_name,
+           tb_testcase.case_owner,
+           tb_testcase.case_step_num,
+           tb_testcase.case_result,
+           tb_testcase.newly_fail,
+           tb_testcase.keep_failing,
+           tb_testcase.start_time,
+           tb_testcase.duration
+    from tb_testcase,
+         tb_dashboard
+    where tb_testcase.batch_no = (select batch_no from tb_testcase order by id desc limit 0,1) and tb_dashboard.batch_no = tb_testcase.batch_no
+    order by
+      tb_testcase.id desc
   </select>
 <!--  <select id="selectSameBatch" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
 <!--    select-->

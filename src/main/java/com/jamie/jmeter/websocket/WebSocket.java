@@ -11,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
 @Slf4j
-@ServerEndpoint("/websocket")  // 接口路径 ws://localhost:8087/webSocket/userId;
+@ServerEndpoint("/websocket")  // ws://localhost:9123/websocket
 public class WebSocket {
 
     // 与某个客户端的连接会话，需要通过它来给客户端发送数据

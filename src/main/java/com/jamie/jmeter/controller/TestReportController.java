@@ -50,10 +50,9 @@ public class TestReportController {
     }
 
     // 当前批次用例表单 (table-list)
-    @Deprecated
     @GetMapping("/jmeter/report/list/latest")
-    public ResponseVo<List<TableVo>> getLatestList() {
-        return testReportService.latestList();
+    public ResponseVo<List<TableVo>> getLatestCaseList() {
+        return testReportService.getLatestCaseList();
     }
 
     // 获取用例步骤 (table-timeline)
@@ -69,7 +68,7 @@ public class TestReportController {
     }
 
     // table-list 分页多查询条件
-    @PostMapping("/jmeter/report/list")
+    @PostMapping("/jmeter/report/list/total")
     public ResponseVo<PageInfo<TableVo>> list(@RequestBody TestcaseFilterVo testcaseFilterVo) {
         return testReportService.list(testcaseFilterVo);
     }

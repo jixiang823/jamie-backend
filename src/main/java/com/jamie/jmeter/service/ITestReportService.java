@@ -19,7 +19,7 @@ public interface ITestReportService {
 
 //    ResponseVo<Dashboard> updateDashboard(); // pie-chart
 
-    ResponseVo<List<TableVo>> latestList(); // table-list
+    ResponseVo<List<TableVo>> getLatestCaseList(); // table-list
 
     ResponseVo<List<Map<String,Integer>>> getCaseResultTrend(); // result-trend
 

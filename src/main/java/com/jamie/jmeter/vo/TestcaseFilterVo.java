@@ -6,6 +6,7 @@ import lombok.Data;
 public class TestcaseFilterVo {
 
     private String batchNo;
+    private String featureName;
     private String storyName;
     private String caseName;
     private String caseOwner;

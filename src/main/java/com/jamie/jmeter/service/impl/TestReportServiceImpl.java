@@ -109,12 +109,12 @@ public class TestReportServiceImpl implements ITestReportService {
             }
         }
         // tb_dashboard更新newly_fail_num和keep_failing_num
-        Integer id = dashboardMapper.selectLatest().getId();
+        Integer id = dashboardMapper.selectLatestSummary().getId();
         dashboard.setId(id);
         dashboardMapper.updateByPrimaryKeySelective(dashboard);
 
         // tb_testcase更新newly_fail和Keep_failing
-        List<TableVo> tableVos = testcaseMapper.selectLatest();
+        List<TableVo> tableVos = dashboardMapper.selectLatestCaseList();
         List<TestCase> testCaseList = new ArrayList<>();
         for (TableVo tableVo : tableVos) {
             TestCase testCase = new TestCase();
@@ -210,7 +210,7 @@ public class TestReportServiceImpl implements ITestReportService {
      * @return dashboard
      */
     public ResponseVo<Dashboard> getDashboard() {
-        Dashboard dashboard = dashboardMapper.selectLatest();
+        Dashboard dashboard = dashboardMapper.selectLatestSummary();
         if (dashboard == null) {
             return ResponseVo.error(ResponseEnum.ARGUMENT_NOT_EXIST);
         }
@@ -222,8 +222,8 @@ public class TestReportServiceImpl implements ITestReportService {
      * @return 用例信息列表
      */
     @Override
-    public ResponseVo<List<TableVo>> latestList() {
-        List<TableVo> tableList = testcaseMapper.selectLatest();
+    public ResponseVo<List<TableVo>> getLatestCaseList() {
+        List<TableVo> tableList = dashboardMapper.selectLatestCaseList();
         if (tableList.isEmpty()) {
             return ResponseVo.error(ResponseEnum.ARGUMENT_NOT_EXIST);
         }
@@ -282,7 +282,7 @@ public class TestReportServiceImpl implements ITestReportService {
 
     @Override
     public ResponseVo<List<Map<String, String>>> getFailCaseHistoryResults() {
-        String batchNo = dashboardMapper.selectLatest().getBatchNo();
+        String batchNo = dashboardMapper.selectLatestSummary().getBatchNo();
         if (batchNo == null) {
             return ResponseVo.error(ResponseEnum.ARGUMENT_NOT_EXIST);
         }
@@ -305,14 +305,15 @@ public class TestReportServiceImpl implements ITestReportService {
         }
         Map<String, Object> queryKeywords = new HashMap<>();
         queryKeywords.put("batchNo", testcaseFilterVo.getBatchNo());
+        queryKeywords.put("featureName", testcaseFilterVo.getFeatureName());
         queryKeywords.put("storyName", testcaseFilterVo.getStoryName());
         queryKeywords.put("caseName", testcaseFilterVo.getCaseName());
         queryKeywords.put("caseOwner", testcaseFilterVo.getCaseOwner());
         queryKeywords.put("caseResult", testcaseFilterVo.getCaseResult());
         queryKeywords.put("sort", testcaseFilterVo.getSort());
-        List<TableVo> page = testcaseMapper.page(queryKeywords);
-        PageInfo<TableVo> pageInfo = new PageInfo<>();
-        pageInfo.setList(page);
+        List<TableVo> pageVoList = testcaseMapper.page(queryKeywords);
+        PageInfo<TableVo> pageInfo = new PageInfo<>(pageVoList);
+        pageInfo.setList(pageVoList);
         return ResponseVo.success(pageInfo);
 
     }

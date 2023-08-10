@@ -18,8 +18,6 @@ public interface TestCaseMapper {
 
     int insertSelective(TestCase row);
 
-    List<TableVo> selectLatest(); // 获取最新批次的用例信息
-
     TestCase selectByPrimaryKey(Integer id);
 
     List<TableVo> page(Map<String, Object> queryKeywords); // 分页多条件查询

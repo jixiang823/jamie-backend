@@ -1,7 +1,7 @@
 package com.jamie.jmeter.dao;
 
 import com.jamie.jmeter.pojo.Dashboard;
-import org.apache.ibatis.annotations.Param;
+import com.jamie.jmeter.vo.TableVo;
 
 import java.util.List;
 import java.util.Map;
@@ -25,7 +25,9 @@ public interface DashboardMapper {
 
     List<Map<String,Integer>> selectCaseKeepFailingTrend(); // keep-failing趋势图(记录最近7次)
 
-    Dashboard selectLatest(); // 查询最新的看板数据
+    Dashboard selectLatestSummary(); // 查询最新的看板数据
+
+    List<TableVo> selectLatestCaseList(); // TODO 获取最新批次的用例信息 (放到dashboard里)
 
 //    List<Dashboard> selectSameBatch(@Param("pageSize") Integer pageSize); // 废弃 查询最新的看板数据(指定数量) 用于更新batch_no为同一批次
 
