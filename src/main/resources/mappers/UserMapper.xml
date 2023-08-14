@@ -143,11 +143,6 @@
     from tb_user
     where username = #{username,jdbcType=VARCHAR}
   </select>
-  <select id="countByEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
-    select count(1)
-    from tb_user
-    where email = #{email,jdbcType=VARCHAR}
-  </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>

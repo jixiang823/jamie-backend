@@ -2,14 +2,18 @@ package com.jamie.jmeter.service.impl;
 
 import com.jamie.jmeter.dao.UserMapper;
 import com.jamie.jmeter.enums.RoleEnum;
+import com.jamie.jmeter.form.UserInfoForm;
 import com.jamie.jmeter.pojo.User;
 import com.jamie.jmeter.service.IUserService;
 import com.jamie.jmeter.vo.ResponseVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 import static com.jamie.jmeter.enums.ResponseEnum.*;
 
@@ -27,11 +31,6 @@ public class UserServiceImpl implements IUserService {
         if (countByUsername > 0) {
             return ResponseVo.error(USERNAME_EXIST);
         }
-        //email不能重复
-        int countByEmail = userMapper.countByEmail(user.getEmail());
-        if (countByEmail > 0) {
-            return ResponseVo.error(EMAIL_EXIST);
-        }
         //设置角色为普通用户
         user.setRole(RoleEnum.TESTER.getCode());
         //MD5摘要算法(Spring自带)
@@ -44,7 +43,7 @@ public class UserServiceImpl implements IUserService {
             return ResponseVo.error(ERROR);
         }
 
-        return ResponseVo.success();
+        return ResponseVo.success(user);
     }
 
     @Override
@@ -59,6 +58,23 @@ public class UserServiceImpl implements IUserService {
             return ResponseVo.error(USERNAME_OR_PASSWORD_ERROR);
         }
         user.setPassword("");
+        return ResponseVo.success(user);
+    }
+
+    @Override
+    public ResponseVo<User> update(Integer id, UserInfoForm userInfoForm) {
+
+        User user = new User();
+        BeanUtils.copyProperties(userInfoForm, user);
+        user.setId(id);
+        user.setUpdateTime(new Date());
+        if (!StringUtils.isEmpty(userInfoForm.getPassword())) {
+            user.setPassword(DigestUtils.md5DigestAsHex(userInfoForm.getPassword().getBytes(StandardCharsets.UTF_8)));
+        }
+        int row = userMapper.updateByPrimaryKeySelective(user);
+        if (row == 0) {
+            return ResponseVo.error(UPDATE_FAIL);
+        }
         return ResponseVo.success(user);
     }
 

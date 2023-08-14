@@ -5,13 +5,14 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class UserRegisterForm {
+public class UserInfoForm {
 
     @NotBlank
     private String username;
-    @NotBlank
     private String password;
-    @NotBlank
-    private String password2;
+    private String email;
+    private String phone;
+    private String avatar;
+    private Integer role;
 
 }

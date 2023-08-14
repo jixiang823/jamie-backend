@@ -11,13 +11,11 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(User row);
+    int updateByPrimaryKeySelective(User row); // 更新用户信息
 
     int updateByPrimaryKey(User row);
 
     int countByUsername(String username); //查询是否有username
-
-    int countByEmail(String email); //查询是否有email
 
     User selectByUsername(String username);
 
