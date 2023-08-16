@@ -26,7 +26,7 @@ public class TestScriptServiceImpl implements ITestScriptService {
     Semaphore semaphore = new Semaphore(1);
 
     @Override
-    public String runScript(ScriptForm scriptForm) {
+    public String runScript(String userId, ScriptForm scriptForm) {
 
         if (isSomeProcessRun) {
             return "有程序正在运行,无法启动";
@@ -34,7 +34,7 @@ public class TestScriptServiceImpl implements ITestScriptService {
         try {
             isSomeProcessRun = true;
             semaphore.acquire();
-            run(scriptForm.getScriptPath());
+            run(userId, scriptForm.getScriptPath());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class TestScriptServiceImpl implements ITestScriptService {
 
     }
 
-    protected void run(String scriptPath) {
+    protected void run(String userId, String scriptPath) {
         Thread thread = new Thread(() -> {
             // 日志记录
             StringBuilder scriptLog = new StringBuilder();
@@ -63,9 +63,9 @@ public class TestScriptServiceImpl implements ITestScriptService {
                 char[] chs = new char[1024];
                 int len;
                 while ((len = inputStreamReader.read(chs)) != -1) {
-                    webSocket.sendAllMessage(new String(chs, 0, len));
+                    webSocket.sendOneMessage(userId, new String(chs, 0, len));
                 }
-                webSocket.sendAllMessage("\n执行完毕!\n");
+                webSocket.sendOneMessage(userId,"\n执行完毕!\n");
                 //阻塞当前线程，直到进程退出为止
                 start.waitFor();
                 if (start.exitValue() == 0) {

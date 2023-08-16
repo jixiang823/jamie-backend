@@ -11,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
 @Slf4j
-@ServerEndpoint("/websocket")  // ws://localhost:9123/websocket
+@ServerEndpoint("/websocket/{userId}")  // ws://localhost:9123/websocket/{userId}
 public class WebSocket {
 
     // 与某个客户端的连接会话，需要通过它来给客户端发送数据
@@ -91,7 +91,7 @@ public class WebSocket {
         Session session = sessionPool.get(userId);
         if (session != null&&session.isOpen()) {
             try {
-                log.info("【websocket消息】 单点消息:"+message);
+                log.info("【websocket消息】 userId{} 单点消息{}", userId, message);
                 session.getBasicRemote().sendText(message);
             } catch (Exception e) {
                 e.printStackTrace();

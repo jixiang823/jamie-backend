@@ -32,7 +32,7 @@ public class ScheduledServiceImpl implements IScheduledService {
     public ResponseVo<ScheduledVo> startTask(ScheduledForm form) {
 
         String corn = form.getCorn();
-        if (StringUtils.isEmpty(corn)) {
+        if (StringUtils.isEmpty(corn) || StringUtils.isBlank(corn)) {
             return ResponseVo.error(ResponseEnum.CORN_NOT_EXIST);
         }
         // 初始化任务
@@ -81,7 +81,7 @@ public class ScheduledServiceImpl implements IScheduledService {
     public ResponseVo<ScheduledVo> restartTask(ScheduledForm form) {
 
         String corn = form.getCorn();
-        if (StringUtils.isEmpty(corn)) {
+        if (StringUtils.isEmpty(corn) || StringUtils.isBlank(corn)) {
             return ResponseVo.error(ResponseEnum.CORN_NOT_EXIST);
         }
 

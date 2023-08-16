@@ -13,6 +13,7 @@ public enum ResponseEnum {
     EMAIL_EXIST(20004,"邮箱已存在"),
     USERNAME_OR_PASSWORD_ERROR(20005,"用户名或密码错误"),
     UPDATE_FAIL(20006, "更新失败"),
+    INVALID_PASSWORD(20007, "密码不能小于6位"),
     SUCCESS(20000, "请求成功"),
     ;
 

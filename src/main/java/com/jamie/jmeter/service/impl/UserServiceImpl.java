@@ -31,6 +31,9 @@ public class UserServiceImpl implements IUserService {
         if (countByUsername > 0) {
             return ResponseVo.error(USERNAME_EXIST);
         }
+        if (user.getPassword().length() < 6 ) {
+            return ResponseVo.error(INVALID_PASSWORD);
+        }
         //设置角色为普通用户
         user.setRole(RoleEnum.TESTER.getCode());
         //MD5摘要算法(Spring自带)
@@ -65,17 +68,24 @@ public class UserServiceImpl implements IUserService {
     public ResponseVo<User> update(Integer id, UserInfoForm userInfoForm) {
 
         User user = new User();
-        BeanUtils.copyProperties(userInfoForm, user);
+        String password = userInfoForm.getPassword();
+        if (password.length() < 6 && !StringUtils.isBlank(password) && !StringUtils.isEmpty(password)) {
+            return ResponseVo.error(INVALID_PASSWORD);
+        }
+        if (StringUtils.isBlank(password) || StringUtils.isEmpty(password)) {
+            BeanUtils.copyProperties(userInfoForm, user, "password");
+        } else {
+            BeanUtils.copyProperties(userInfoForm, user);
+            user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8)));
+        }
         user.setId(id);
         user.setUpdateTime(new Date());
-        if (!StringUtils.isEmpty(userInfoForm.getPassword())) {
-            user.setPassword(DigestUtils.md5DigestAsHex(userInfoForm.getPassword().getBytes(StandardCharsets.UTF_8)));
-        }
         int row = userMapper.updateByPrimaryKeySelective(user);
         if (row == 0) {
             return ResponseVo.error(UPDATE_FAIL);
         }
         return ResponseVo.success(user);
+
     }
 
 }
