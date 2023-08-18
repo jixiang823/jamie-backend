@@ -13,8 +13,6 @@ import java.util.Map;
 
 public interface ITestReportService {
 
-    void save(String reportData); // JMeter测试结果入库
-
     ResponseVo<Dashboard> getDashboard(); // pie-chart
 
 //    ResponseVo<Dashboard> updateDashboard(); // pie-chart

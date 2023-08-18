@@ -20,22 +20,11 @@ public class TestReportController {
     @Resource
     private ITestReportService testReportService;
 
-    // 存储JMeter测试结果,由backend-listener调用. (TODO 之后单独弄一个controller)
-    @PostMapping("/jmeter/report/save")
-    public void save(@RequestBody String reportData) {
-        testReportService.save(reportData);
-    }
-
     // 获取看板最新数据 (pie)
     @GetMapping("/jmeter/report/info")
     public ResponseVo<Dashboard> getDashboard() {
         return testReportService.getDashboard();
     }
-
-//    @GetMapping("/jmeter/report/info/update")
-//    public ResponseVo<Dashboard> updateDashboard() {
-//        return jMeterReportModelService.updateDashboard();
-//    }
 
     // line-chart
     @GetMapping("/jmeter/report/trend/case-result")
