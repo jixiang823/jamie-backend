@@ -24,6 +24,8 @@ import java.util.concurrent.ScheduledFuture;
 public class ScheduledServiceImpl implements IScheduledService {
 
     @Resource
+    private AutoTestTask autoTestTask;
+    @Resource
     private ThreadPoolTaskScheduler threadPoolTaskScheduler;
     // 有多个任务的时候会用到,根据任务名(key)去拿到对应的任务信息.
     private final Map<String, ScheduledFutureHolder> scheduleMap = new HashMap<>();
@@ -35,8 +37,6 @@ public class ScheduledServiceImpl implements IScheduledService {
         if (StringUtils.isEmpty(corn) || StringUtils.isBlank(corn)) {
             return ResponseVo.error(ResponseEnum.CORN_NOT_EXIST);
         }
-        // 初始化任务
-        AutoTestTask autoTestTask = new AutoTestTask();
         // 将任务交给任务调度器执行
         ScheduledFuture<?> schedule = threadPoolTaskScheduler.schedule(autoTestTask, new CronTrigger(corn));
         // 将任务包装成ScheduledFutureHolder

@@ -23,3 +23,8 @@ server:
     session:
       timeout: 14400
   port: 9123
+
+jmeter:
+  jmeter-home: jmeter
+  jmx-file-path: /Users/jixiang/Downloads/demo.jmx
+  java-home: /Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home

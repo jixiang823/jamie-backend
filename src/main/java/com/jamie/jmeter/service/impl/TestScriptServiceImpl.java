@@ -1,9 +1,11 @@
 package com.jamie.jmeter.service.impl;
 
 import com.jamie.jmeter.form.ScriptForm;
+import com.jamie.jmeter.properties.JMeterProperties;
 import com.jamie.jmeter.service.ITestScriptService;
 import com.jamie.jmeter.websocket.WebSocket;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,6 +15,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Semaphore;
 
 @Service
@@ -21,6 +24,9 @@ public class TestScriptServiceImpl implements ITestScriptService {
 
     @Resource
     private WebSocket webSocket;
+
+    @Resource
+    private JMeterProperties jMeterProperties;
 
     static Boolean isSomeProcessRun = false;
     Semaphore semaphore = new Semaphore(1);
@@ -42,19 +48,23 @@ public class TestScriptServiceImpl implements ITestScriptService {
 
     }
 
-    protected void run(String userId, String scriptPath) {
+    protected void run(String userId, String jmxFilePath) {
         Thread thread = new Thread(() -> {
-            // 日志记录
+            // 记录日志
             StringBuilder scriptLog = new StringBuilder();
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            // 配置环境变量
+            Map<String, String> environment = processBuilder.environment();
+            environment.put("JAVA_HOME", jMeterProperties.getJavaHome());
             // shell命令执行jmx脚本
             List<String> commandList = new ArrayList<>();
-            commandList .add("jmeter");
-            commandList .add("-n");
-            commandList .add("-t");
-            commandList .add(scriptPath); // 所在服务器的路径
+            commandList.add(jMeterProperties.getJmeterHome());
+            commandList.add("-n");
+            commandList.add("-t");
+            commandList.add(jmxFilePath);
             commandList.add("-j");
-            commandList.add("/dev/stdout"); // 将具体的日志打印出来
-            ProcessBuilder processBuilder = new ProcessBuilder(commandList);
+            commandList.add("/dev/stdout");
+            processBuilder.command(commandList);
             processBuilder.redirectErrorStream(true);
             try {
                 Process start = processBuilder.start();

@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: JiXiang5678!
-    url: jdbc:mysql://rm-uf6580y08e4zmg2xf.mysql.rds.aliyuncs.com:3306/jtest-tool?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+    password: 123456
+    url: jdbc:mysql://localhost:3306/jmeter_report?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
 
 # pojo属性名转换为数据库可识别的斜划线格式
 mybatis:
@@ -23,3 +23,8 @@ server:
     session:
       timeout: 14400
   port: 9123
+
+jmeter:
+  jmeter-home: /usr/local/apache-jmeter-5.6.2/bin/jmeter
+  jmx-file-path: /root/scripts/demo.jmx
+  java-home: /usr/local/jdk1.8.0_231
