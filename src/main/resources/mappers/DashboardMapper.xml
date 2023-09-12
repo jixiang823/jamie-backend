@@ -6,7 +6,6 @@
     <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
     <result column="feature_name" jdbcType="VARCHAR" property="featureName" />
     <result column="build_env" jdbcType="VARCHAR" property="buildEnv" />
-    <result column="build_type" jdbcType="INTEGER" property="buildType" />
     <result column="case_num" jdbcType="INTEGER" property="caseNum" />
     <result column="case_pass_num" jdbcType="INTEGER" property="casePassNum" />
     <result column="case_fail_num" jdbcType="INTEGER" property="caseFailNum" />
@@ -18,7 +17,7 @@
     <result column="duration" jdbcType="BIGINT" property="duration" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, batch_no, feature_name, build_env, build_type, case_num, case_pass_num, case_fail_num, case_pass_rate,
+    id, batch_no, feature_name, build_env, case_num, case_pass_num, case_fail_num, case_pass_rate,
     newly_fail_num, keep_failing_num, start_time, end_time, duration
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -145,12 +144,12 @@
   </delete>
   <insert id="insert" parameterType="com.jamie.jmeter.pojo.Dashboard">
     insert into tb_dashboard (id, batch_no, feature_name,
-      build_env, build_type, case_num,
+      build_env, case_num,
       case_pass_num, case_fail_num, case_pass_rate, 
       newly_fail_num, keep_failing_num, start_time,
       end_time, duration)
     values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{featureName,jdbcType=VARCHAR},
-      #{buildEnv,jdbcType=VARCHAR}, #{buildType,jdbcType=INTEGER}, #{caseNum,jdbcType=INTEGER},
+      #{buildEnv,jdbcType=VARCHAR}, #{caseNum,jdbcType=INTEGER},
       #{casePassNum,jdbcType=INTEGER}, #{caseFailNum,jdbcType=INTEGER}, #{casePassRate,jdbcType=DECIMAL},
       #{newlyFailNum,jdbcType=INTEGER}, #{keepFailingNum,jdbcType=INTEGER}, #{startTime,jdbcType=BIGINT},
       #{endTime,jdbcType=BIGINT}, #{duration,jdbcType=BIGINT})
@@ -169,9 +168,6 @@
       </if>
       <if test="buildEnv != null">
         build_env,
-      </if>
-      <if test="buildType != null">
-        build_type,
       </if>
       <if test="caseNum != null">
         case_num,
@@ -214,9 +210,6 @@
       <if test="buildEnv != null">
         #{buildEnv,jdbcType=VARCHAR},
       </if>
-      <if test="buildType != null">
-        #{buildType,jdbcType=INTEGER},
-      </if>
       <if test="caseNum != null">
         #{caseNum,jdbcType=INTEGER},
       </if>
@@ -258,9 +251,6 @@
       <if test="buildEnv != null">
         build_env = #{buildEnv,jdbcType=VARCHAR},
       </if>
-      <if test="buildType != null">
-        build_type = #{buildType,jdbcType=INTEGER},
-      </if>
       <if test="caseNum != null">
         case_num = #{caseNum,jdbcType=INTEGER},
       </if>
@@ -296,7 +286,6 @@
     set batch_no = #{batchNo,jdbcType=VARCHAR},
       feature_name = #{featureName,jdbcType=VARCHAR},
       build_env = #{buildEnv,jdbcType=VARCHAR},
-      build_type = #{buildType,jdbcType=INTEGER},
       case_num = #{caseNum,jdbcType=INTEGER},
       case_pass_num = #{casePassNum,jdbcType=INTEGER},
       case_fail_num = #{caseFailNum,jdbcType=INTEGER},
