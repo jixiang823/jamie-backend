@@ -11,7 +11,6 @@ public class Dashboard {
     private String batchNo;
     private String featureName;
     private String buildEnv;
-    private Integer buildType;
     private Integer caseNum;
     private Integer casePassNum;
     private Integer caseFailNum;
