@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jamie.dao.TestSummaryMapper">
+  <resultMap id="BaseResultMap" type="com.jamie.pojo.TestSummary">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
+    <result column="feature_name" jdbcType="VARCHAR" property="featureName" />
+    <result column="build_env" jdbcType="VARCHAR" property="buildEnv" />
+    <result column="case_num" jdbcType="INTEGER" property="caseNum" />
+    <result column="case_pass_num" jdbcType="INTEGER" property="casePassNum" />
+    <result column="case_fail_num" jdbcType="INTEGER" property="caseFailNum" />
+    <result column="case_pass_rate" jdbcType="DECIMAL" property="casePassRate" />
+    <result column="newly_fail_num" jdbcType="INTEGER" property="newlyFailNum" />
+    <result column="keep_failing_num" jdbcType="INTEGER" property="keepFailingNum" />
+    <result column="start_time" jdbcType="BIGINT" property="startTime" />
+    <result column="end_time" jdbcType="BIGINT" property="endTime" />
+    <result column="duration" jdbcType="BIGINT" property="duration" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, batch_no, feature_name, build_env, case_num, case_pass_num, case_fail_num, case_pass_rate,
+    newly_fail_num, keep_failing_num, start_time, end_time, duration
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_test_summary
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectCaseResultTrend" resultType="java.util.Map">
+    select
+      id,
+      case_pass_rate as casePassRate,
+      case_pass_num as casePassNum,
+      case_fail_num as caseFailNum
+    from
+      tb_test_summary
+    order by
+      batch_no desc
+      limit 0,7
+  </select>
+  <select id="selectCaseTotalPassTrend" resultType="java.util.Map">
+    select
+      id,
+      case_pass_num as casePassNum
+    from
+      tb_test_summary
+    order by
+      batch_no desc
+      limit 0,7
+  </select>
+  <select id="selectCaseTotalFailTrend" resultType="java.util.Map">
+    select
+      id,
+      case_fail_num as caseFailNum
+    from
+      tb_test_summary
+    order by
+      batch_no desc
+      limit 0,7
+  </select>
+  <select id="selectCaseNewlyFailTrend" resultType="java.util.Map">
+    select
+      id,
+      newly_fail_num as newlyFailNum
+    from
+      tb_test_summary
+    order by
+      batch_no desc
+      limit 0,7
+  </select>
+  <select id="selectCaseKeepFailingTrend" resultType="java.util.Map">
+    select
+      id,
+      keep_failing_num as keepFailingNum
+    from
+      tb_test_summary
+    order by
+      batch_no desc
+      limit 0,7
+  </select>
+  <select id="selectLatestSummary" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_test_summary
+    order by id desc limit 0,1
+  </select>
+  <select id="selectLatestCaseList" resultType="com.jamie.vo.TableVo">
+    select tb_test_summary.batch_no,
+           tb_test_summary.feature_name,
+           tb_test_summary.build_env,
+           tb_testcase_info.id,
+           tb_testcase_info.story_name,
+           tb_testcase_info.case_name,
+           tb_testcase_info.case_owner,
+           tb_testcase_info.case_step_num,
+           tb_testcase_info.case_result,
+           tb_testcase_info.newly_fail,
+           tb_testcase_info.keep_failing,
+           tb_testcase_info.start_time,
+           tb_testcase_info.duration
+    from tb_testcase_info,
+         tb_test_summary
+    where tb_testcase_info.batch_no = (select batch_no from tb_testcase_info order by id desc limit 0,1) and tb_test_summary.batch_no = tb_testcase_info.batch_no
+    order by
+      tb_testcase_info.id desc
+  </select>
+<!--  <select id="selectSameBatch" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from-->
+<!--      tb_test_summary-->
+<!--    order by-->
+<!--      id desc-->
+<!--      limit 0,#{pageSize}-->
+<!--  </select>-->
+  <select id="selectMaxBatchNo" resultType="string">
+    select batch_no
+    from tb_test_summary
+    where batch_no like (date_format(now(), '%Y%m%d%'))
+    order by batch_no desc limit 0,1
+  </select>
+  <select id="selectFailCaseHistoryResults" resultType="java.util.Map">
+    select
+      case_name as caseName,
+      group_concat( case_result order by batch_no desc ) as historyResults
+    from
+      tb_testcase_info
+    where
+        case_name in (
+        select
+          case_name
+        from
+          tb_testcase_info
+        where
+          batch_no = #{batchNo,jdbcType=VARCHAR}
+          and case_result = 0
+      )
+    group by
+      case_name
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_test_summary
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jamie.pojo.TestSummary">
+    insert into tb_test_summary (id, batch_no, feature_name,
+      build_env, case_num,
+      case_pass_num, case_fail_num, case_pass_rate, 
+      newly_fail_num, keep_failing_num, start_time,
+      end_time, duration)
+    values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{featureName,jdbcType=VARCHAR},
+      #{buildEnv,jdbcType=VARCHAR}, #{caseNum,jdbcType=INTEGER},
+      #{casePassNum,jdbcType=INTEGER}, #{caseFailNum,jdbcType=INTEGER}, #{casePassRate,jdbcType=DECIMAL},
+      #{newlyFailNum,jdbcType=INTEGER}, #{keepFailingNum,jdbcType=INTEGER}, #{startTime,jdbcType=BIGINT},
+      #{endTime,jdbcType=BIGINT}, #{duration,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jamie.pojo.TestSummary">
+    insert into tb_test_summary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchNo != null">
+        batch_no,
+      </if>
+      <if test="featureName != null">
+        feature_name,
+      </if>
+      <if test="buildEnv != null">
+        build_env,
+      </if>
+      <if test="caseNum != null">
+        case_num,
+      </if>
+      <if test="casePassNum != null">
+        case_pass_num,
+      </if>
+      <if test="caseFailNum != null">
+        case_fail_num,
+      </if>
+      <if test="casePassRate != null">
+        case_pass_rate,
+      </if>
+      <if test="newlyFailNum != null">
+        newly_fail_num,
+      </if>
+      <if test="keepFailingNum != null">
+        keep_failing_num,
+      </if>
+      <if test="projectStartTime != null">
+        start_time,
+      </if>
+      <if test="projectEndTime != null">
+        end_time,
+      </if>
+      <if test="projectDuration != null">
+        duration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null">
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="buildEnv != null">
+        #{buildEnv,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null">
+        #{caseNum,jdbcType=INTEGER},
+      </if>
+      <if test="casePassNum != null">
+        #{casePassNum,jdbcType=INTEGER},
+      </if>
+      <if test="caseFailNum != null">
+        #{caseFailNum,jdbcType=INTEGER},
+      </if>
+      <if test="casePassRate != null">
+        #{casePassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="newlyFailNum != null">
+        #{newlyFailNum,jdbcType=INTEGER},
+      </if>
+      <if test="keepFailingNum != null">
+        #{keepFailingNum,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jamie.pojo.TestSummary">
+    update tb_test_summary
+    <set>
+      <if test="batchNo != null">
+        batch_no = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureName != null">
+        feature_name = #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="buildEnv != null">
+        build_env = #{buildEnv,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null">
+        case_num = #{caseNum,jdbcType=INTEGER},
+      </if>
+      <if test="casePassNum != null">
+        case_pass_num = #{casePassNum,jdbcType=INTEGER},
+      </if>
+      <if test="caseFailNum != null">
+        case_fail_num = #{caseFailNum,jdbcType=INTEGER},
+      </if>
+      <if test="casePassRate != null">
+        case_pass_rate = #{casePassRate,jdbcType=DECIMAL},
+      </if>
+      <if test="newlyFailNum != null">
+        newly_fail_num = #{newlyFailNum,jdbcType=INTEGER},
+      </if>
+      <if test="keepFailingNum != null">
+        keep_failing_num = #{keepFailingNum,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jamie.pojo.TestSummary">
+    update tb_test_summary
+    set batch_no = #{batchNo,jdbcType=VARCHAR},
+      feature_name = #{featureName,jdbcType=VARCHAR},
+      build_env = #{buildEnv,jdbcType=VARCHAR},
+      case_num = #{caseNum,jdbcType=INTEGER},
+      case_pass_num = #{casePassNum,jdbcType=INTEGER},
+      case_fail_num = #{caseFailNum,jdbcType=INTEGER},
+      case_pass_rate = #{casePassRate,jdbcType=DECIMAL},
+      newly_fail_num = #{newlyFailNum,jdbcType=INTEGER},
+      keep_failing_num = #{keepFailingNum,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
+      duration = #{duration,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--批量更新-->
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+      update tb_test_summary
+      set
+      batch_no = #{item.batchNo}
+      where id = #{item.id}
+    </foreach>
+  </update>
+</mapper>

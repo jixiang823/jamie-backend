@@ -5,25 +5,23 @@ spring:
     password: 123456
     url: jdbc:mysql://localhost:3306/jmeter_report?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
 
-# pojo属性名转换为数据库可识别的斜划线格式
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #控制台打印SQL日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mappers/*.xml
 
-# 控制台打印日志优化: 进程号 日志级别 属于哪个包
 logging:
   pattern:
     console: "[%thread] %-5level %logger{36} - %msg%n"
 
-# 本地环境
 server:
   servlet:
     session:
       timeout: 14400
   port: 9123
 
+# docker
 jmeter:
   jmeter-home: /usr/local/apache-jmeter-5.6.2/bin/jmeter
   jmx-file-path: /root/scripts/demo.jmx

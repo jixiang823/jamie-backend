@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.jamie</groupId>
-    <artifactId>jmeter-report-backend</artifactId>
+    <artifactId>jamie-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>jmeter-report-backend</name>
     <description>jmeter-report-backend</description>

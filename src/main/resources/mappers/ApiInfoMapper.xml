@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jamie.dao.ApiInfoMapper">
+  <resultMap id="BaseResultMap" type="com.jamie.pojo.ApiInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="case_id" jdbcType="INTEGER" property="caseId" />
+    <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
+    <result column="api_name" jdbcType="VARCHAR" property="apiName" />
+    <result column="request_host" jdbcType="VARCHAR" property="requestHost" />
+    <result column="request_path" jdbcType="VARCHAR" property="requestPath" />
+    <result column="request_method" jdbcType="VARCHAR" property="requestMethod" />
+    <result column="request_header" jdbcType="VARCHAR" property="requestHeader" />
+    <result column="request_body" jdbcType="VARCHAR" property="requestBody" />
+    <result column="response_header" jdbcType="VARCHAR" property="responseHeader" />
+    <result column="response_body" jdbcType="VARCHAR" property="responseBody" />
+    <result column="response_code" jdbcType="VARCHAR" property="responseCode" />
+    <result column="assert_message" jdbcType="VARCHAR" property="assertMessage" />
+    <result column="api_result" jdbcType="BOOLEAN" property="apiResult" />
+    <result column="start_time" jdbcType="BIGINT" property="startTime" />
+    <result column="end_time" jdbcType="BIGINT" property="endTime" />
+    <result column="duration" jdbcType="BIGINT" property="duration" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, case_id, batch_no, api_name, request_host, request_path, request_method, request_header, request_body,
+    response_header, response_body, response_code, assert_message, api_result, start_time,
+    end_time, duration
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_api_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByCaseId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_api_info
+    where case_id = #{caseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_api_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jamie.pojo.ApiInfo">
+    insert into tb_api_info (id, case_id, batch_no, api_name, request_host,
+      request_path, request_method, request_header,
+      request_body, response_header, response_body,
+      response_code, assert_message, api_result,
+      start_time, end_time, duration
+      )
+    values (#{id,jdbcType=INTEGER}, #{caseId,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{apiName,jdbcType=VARCHAR}, #{requestHost,jdbcType=VARCHAR}
+      #{requestPath,jdbcType=VARCHAR}, #{requestMethod,jdbcType=VARCHAR}, #{requestHeader,jdbcType=VARCHAR},
+      #{requestBody,jdbcType=VARCHAR}, #{responseHeader,jdbcType=VARCHAR}, #{responseBody,jdbcType=VARCHAR},
+      #{responseCode,jdbcType=VARCHAR}, #{assertMessage,jdbcType=VARCHAR}, #{apiResult,jdbcType=BOOLEAN},
+      #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, #{duration,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="batchInsert" parameterType="list">
+    insert into tb_api_info (case_id, batch_no, api_name, request_host, request_path, request_method, request_header, request_body,
+    response_header, response_body, response_code, assert_message, api_result, start_time,
+    end_time, duration)
+    values
+    <foreach collection="caseStepsList" index="index" item="caseSteps" separator=",">
+      <foreach collection="caseSteps" index="index" item="caseStep" separator=",">
+        (
+        #{caseStep.caseId},
+        #{caseStep.batchNo},
+        #{caseStep.apiName},
+        #{caseStep.requestHost},
+        #{caseStep.requestPath},
+        #{caseStep.requestMethod},
+        #{caseStep.requestHeader},
+        #{caseStep.requestBody},
+        #{caseStep.responseHeader},
+        #{caseStep.responseBody},
+        #{caseStep.responseCode},
+        #{caseStep.assertMessage},
+        #{caseStep.apiResult},
+        #{caseStep.startTime},
+        #{caseStep.endTime},
+        #{caseStep.duration}
+        )
+      </foreach>
+    </foreach>
+  </insert>
+  <insert id="insertSelective" parameterType="com.jamie.pojo.ApiInfo">
+    insert into tb_api_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="caseId != null">
+        case_id,
+      </if>
+      <if test="batchNo != null">
+        batch_no,
+      </if>
+      <if test="apiName != null">
+        api_name,
+      </if>
+      <if test="requestHost != null">
+        request_host,
+      </if>
+      <if test="requestPath != null">
+        request_path,
+      </if>
+      <if test="requestMethod != null">
+        request_method,
+      </if>
+      <if test="requestHeader != null">
+        request_header,
+      </if>
+      <if test="requestBody != null">
+        request_body,
+      </if>
+      <if test="responseHeader != null">
+        response_header,
+      </if>
+      <if test="responseBody != null">
+        response_body,
+      </if>
+      <if test="responseCode != null">
+        response_code,
+      </if>
+      <if test="assertMessage != null">
+        assert_message,
+      </if>
+      <if test="apiResult != null">
+        api_result,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null">
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="apiName != null">
+        #{apiName,jdbcType=VARCHAR},
+      </if>
+      <if test="requestHost != null">
+        #{requestHost,jdbcType=VARCHAR},
+      </if>
+      <if test="requestPath != null">
+        #{requestPath,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMethod != null">
+        #{requestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="requestHeader != null">
+        #{requestHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="requestBody != null">
+        #{requestBody,jdbcType=VARCHAR},
+      </if>
+      <if test="responseHeader != null">
+        #{responseHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="responseBody != null">
+        #{responseBody,jdbcType=VARCHAR},
+      </if>
+      <if test="responseCode != null">
+        #{responseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="assertMessage != null">
+        #{assertMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="apiResult != null">
+        #{apiResult,jdbcType=BOOLEAN},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jamie.pojo.ApiInfo">
+    update tb_api_info
+    <set>
+      <if test="caseId != null">
+        case_id = #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null">
+        batch_no = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="apiName != null">
+        api_name = #{apiName,jdbcType=VARCHAR},
+      </if>
+      <if test="requestHost != null">
+        request_host = #{requestHost,jdbcType=VARCHAR},
+      </if>
+      <if test="requestPath != null">
+        request_path = #{requestPath,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMethod != null">
+        request_method = #{requestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="requestHeader != null">
+        request_header = #{requestHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="requestBody != null">
+        request_body = #{requestBody,jdbcType=VARCHAR},
+      </if>
+      <if test="responseHeader != null">
+        response_header = #{responseHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="responseBody != null">
+        response_body = #{responseBody,jdbcType=VARCHAR},
+      </if>
+      <if test="responseCode != null">
+        response_code = #{responseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="assertMessage != null">
+        assert_message = #{assertMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="apiResult != null">
+        api_result = #{apiResult,jdbcType=BOOLEAN},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jamie.pojo.ApiInfo">
+    update tb_api_info
+    set case_id = #{caseId,jdbcType=INTEGER},
+      batch_no = #{batchNo,jdbcType=VARCHAR},
+      api_name = #{apiName,jdbcType=VARCHAR},
+      request_host = #{requestHost,jdbcType=VARCHAR},
+      request_path = #{requestPath,jdbcType=VARCHAR},
+      request_method = #{requestMethod,jdbcType=VARCHAR},
+      request_header = #{requestHeader,jdbcType=VARCHAR},
+      request_body = #{requestBody,jdbcType=VARCHAR},
+      response_header = #{responseHeader,jdbcType=VARCHAR},
+      response_body = #{responseBody,jdbcType=VARCHAR},
+      response_code = #{responseCode,jdbcType=VARCHAR},
+      assert_message = #{assertMessage,jdbcType=VARCHAR},
+      api_result = #{apiResult,jdbcType=BOOLEAN},
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
+      duration = #{duration,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

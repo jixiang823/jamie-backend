@@ -62,7 +62,7 @@
 2023-09-07 00:00:03,731 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
 2023-09-07 00:00:03,732 INFO o.a.j.v.b.BackendListener: Worker ended
 2023-09-07 00:00:03,901 INFO c.j.j.l.JMeterReportBackendListener: 数据发送成功
-2023-09-07 00:00:03,902 INFO c.j.j.l.JMeterReportBackendListener: 测试数据: JMeterReportModel(dashboard=Dashboard(featureName=企业微信通讯录, buildEnv=STG, buildType=1, caseNum=5, casePassNum=1, caseFailNum=4, casePassRate=0.20, newlyFailNum=0, keepFailingNum=0, startTime=1694016001967, endTime=1694016003732, duration=1765), testCaseModels=[TestCaseModel(caseInfo=TestCase(storyName=部门管理模块A, caseOwner=大吉, caseName=t_login_A, caseStepNum=1, caseResult=true, newlyFail=false, keepFailing=false, startTime=1694016002002, endTime=1694016002638, duration=636), caseSteps=[ApiObject(apiName=a_getToken, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/gettoken, requestMethod=GET, requestHeader=Connection: keep-alive
+2023-09-07 00:00:03,902 INFO c.j.j.l.JMeterReportBackendListener: 测试数据: JMeterReportModel(testSummary=Dashboard(featureName=企业微信通讯录, buildEnv=STG, buildType=1, caseNum=5, casePassNum=1, caseFailNum=4, casePassRate=0.20, newlyFailNum=0, keepFailingNum=0, startTime=1694016001967, endTime=1694016003732, duration=1765), testCaseModels=[TestCaseModel(caseInfo=TestCase(storyName=部门管理模块A, caseOwner=大吉, caseName=t_login_A, caseStepNum=1, caseResult=true, newlyFail=false, keepFailing=false, startTime=1694016002002, endTime=1694016002638, duration=636), caseSteps=[ApiObject(apiName=a_getToken, requestHost=qyapi.weixin.qq.com, requestPath=/cgi-bin/gettoken, requestMethod=GET, requestHeader=Connection: keep-alive
 Content-Type: application/json
 Host: qyapi.weixin.qq.com
 User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_192)
