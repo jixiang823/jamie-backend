@@ -118,7 +118,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>jmeter-report-backend</finalName>
+        <finalName>jamie-backend</finalName>
     </build>
 
 </project>
