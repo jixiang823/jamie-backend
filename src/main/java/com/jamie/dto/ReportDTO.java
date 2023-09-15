@@ -1,4 +1,4 @@
-package com.jamie.model;
+package com.jamie.dto;
 
 import com.jamie.pojo.TestSummary;
 import lombok.Data;
@@ -7,9 +7,9 @@ import java.util.List;
 
 
 @Data
-public class JMeterReportModel {
+public class ReportDTO {
 
     private TestSummary testSummary; // 概述
-    private List<TestCaseModel> testCaseModels; // 测试用例信息
+    private List<TestCaseDTO> testCaseDTOS; // 测试用例信息
 
 }

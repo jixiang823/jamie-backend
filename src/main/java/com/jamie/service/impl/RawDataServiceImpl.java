@@ -3,8 +3,8 @@ package com.jamie.service.impl;
 import com.jamie.dao.ApiInfoMapper;
 import com.jamie.dao.TestCaseInfoMapper;
 import com.jamie.dao.TestSummaryMapper;
-import com.jamie.model.JMeterReportModel;
-import com.jamie.model.TestCaseModel;
+import com.jamie.dto.ReportDTO;
+import com.jamie.dto.TestCaseDTO;
 import com.jamie.pojo.ApiInfo;
 import com.jamie.pojo.TestSummary;
 import com.jamie.pojo.TestCaseInfo;
@@ -39,18 +39,18 @@ public class RawDataServiceImpl implements IRawDataService {
     @Override
     public void save(String rawData) {
 
-        JMeterReportModel jMeterReportModel = GsonUtil.jsonToBean(rawData, JMeterReportModel.class);
+        ReportDTO reportDTO = GsonUtil.jsonToBean(rawData, ReportDTO.class);
         String batchNo = generateBatchNo();
         // case信息
-        List<TestCaseModel> testCaseModels = jMeterReportModel.getTestCaseModels();
+        List<TestCaseDTO> testCaseDTOS = reportDTO.getTestCaseDTOS();
         // caseInfo
-        List<TestCaseInfo> caseInfoList = buildCaseInfoList(testCaseModels, batchNo);
+        List<TestCaseInfo> caseInfoList = buildCaseInfoList(testCaseDTOS, batchNo);
         testcaseInfoMapper.batchInsert(caseInfoList);
         // caseSteps
-        List<List<ApiInfo>> caseStepsList = buildCaseStepsList(testCaseModels, batchNo);
+        List<List<ApiInfo>> caseStepsList = buildCaseStepsList(testCaseDTOS, batchNo);
         apiInfoMapper.batchInsert(caseStepsList);
         // tb_test_summary (newlyFail和keepFailing依赖于caseSteps,所以放最后)
-        TestSummary testSummary = jMeterReportModel.getTestSummary();
+        TestSummary testSummary = reportDTO.getTestSummary();
         testSummary.setBatchNo(batchNo);
         testSummaryMapper.insert(testSummary);
         // 更新Dashboard`新增失败`和`持续失败`的个数. 标记当前用例是否是`新增失败`或`持续失败`
@@ -148,14 +148,14 @@ public class RawDataServiceImpl implements IRawDataService {
     /**
      * table list
      *
-     * @param testCaseModels 用例信息
+     * @param testCaseDTOS 用例信息
      * @param batchNo        批次号
      * @return caseInfoList
      */
-    private List<TestCaseInfo> buildCaseInfoList(List<TestCaseModel> testCaseModels, String batchNo) {
+    private List<TestCaseInfo> buildCaseInfoList(List<TestCaseDTO> testCaseDTOS, String batchNo) {
         List<TestCaseInfo> caseInfoList = new ArrayList<>();
-        for (TestCaseModel testcaseModel : testCaseModels) {
-            TestCaseInfo caseInfo = testcaseModel.getCaseInfo();
+        for (TestCaseDTO testcaseDTO : testCaseDTOS) {
+            TestCaseInfo caseInfo = testcaseDTO.getCaseInfo();
             caseInfo.setBatchNo(batchNo);
             caseInfoList.add(caseInfo);
         }
@@ -165,15 +165,15 @@ public class RawDataServiceImpl implements IRawDataService {
     /**
      * 构造CaseSteps
      *
-     * @param testCaseModels 未对caseId和batchNo赋值的ApiObject集合
+     * @param testCaseDTOS 未对caseId和batchNo赋值的ApiObject集合
      * @param batchNo        本次执行的批次号
      * @return 已对caseId和batchNo赋值的ApiObject集合
      */
-    private List<List<ApiInfo>> buildCaseStepsList(List<TestCaseModel> testCaseModels, String batchNo) {
+    private List<List<ApiInfo>> buildCaseStepsList(List<TestCaseDTO> testCaseDTOS, String batchNo) {
 
         List<List<ApiInfo>> apiInfoList = new ArrayList<>();
-        for (TestCaseModel testcaseModel : testCaseModels) {
-            List<ApiInfo> apiInfos = testcaseModel.getCaseSteps();
+        for (TestCaseDTO testcaseDTO : testCaseDTOS) {
+            List<ApiInfo> apiInfos = testcaseDTO.getCaseSteps();
             apiInfoList.add(apiInfos);
         }
         // 根据本次执行的批次号拿到caseId集合
