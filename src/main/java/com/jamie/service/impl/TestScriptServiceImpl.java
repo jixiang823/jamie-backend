@@ -49,13 +49,9 @@ public class TestScriptServiceImpl implements ITestScriptService {
 
     private void run(String userId, String jmxFilePath) {
         Thread thread = new Thread(() -> {
-            // 记录日志
-            StringBuilder scriptLog = new StringBuilder();
             ProcessBuilder processBuilder = new ProcessBuilder();
-            // 配置环境变量
             Map<String, String> environment = processBuilder.environment();
             environment.put("JAVA_HOME", jMeterProperties.getJavaHome());
-            // shell命令执行jmx脚本
             List<String> commandList = new ArrayList<>();
             commandList.add(jMeterProperties.getJmeterHome());
             commandList.add("-n");
@@ -78,7 +74,7 @@ public class TestScriptServiceImpl implements ITestScriptService {
                 //阻塞当前线程，直到进程退出为止
                 start.waitFor();
                 if (start.exitValue() == 0) {
-                    log.info("进程正常结束 {}", scriptLog);
+                    log.info("进程正常结束");
                 } else {
                     log.info("进程异常结束");
                 }
@@ -91,6 +87,14 @@ public class TestScriptServiceImpl implements ITestScriptService {
             isSomeProcessRun = false;
         });
         thread.start();
+        try {
+            thread.join(60000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (thread.isAlive()) {
+            thread.interrupt();
+        }
     }
 
 }

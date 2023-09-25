@@ -116,7 +116,14 @@ public class AutoTestTask implements Runnable{
             isSomeProcessRun = false;
         });
         thread.start();
-        thread.join();
+        try {
+            thread.join(60000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (thread.isAlive()) {
+            thread.interrupt();
+        }
     }
 
 }

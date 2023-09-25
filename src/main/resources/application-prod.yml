@@ -21,7 +21,6 @@ server:
       timeout: 14400
   port: 9123
 
-# docker
 jmeter:
   jmeter-home: /usr/local/apache-jmeter-5.6.2/bin/jmeter
   jmx-file-path: /root/scripts/

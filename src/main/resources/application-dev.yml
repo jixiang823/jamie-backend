@@ -21,7 +21,6 @@ server:
       timeout: 14400
   port: 9123
 
-# local
 jmeter:
   jmeter-home: jmeter
   jmx-file-path: /Users/jixiang/Downloads/
