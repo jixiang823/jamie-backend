@@ -28,61 +28,95 @@ public class AutoTestTask implements Runnable{
 
     @Override
     public void run() {
-        if (isSomeProcessRun) {
-            log.info("有程序正在运行,无法启动");
-        }
-        if (!isSomeProcessRun) {
-            try {
-                isSomeProcessRun = true;
-                semaphore.acquire();
-                Thread thread = new Thread(() -> {
-                    // 记录日志
-                    StringBuilder scriptLog = new StringBuilder();
-                    ProcessBuilder processBuilder = new ProcessBuilder();
-                    // 配置环境变量
-                    Map<String, String> environment = processBuilder.environment();
-                    environment.put("JAVA_HOME", jMeterProperties.getJavaHome());
-                    // shell命令执行jmx脚本
-                    List<String> commandList = new ArrayList<>();
-                    commandList.add(jMeterProperties.getJmeterHome());
-                    commandList.add("-n");
-                    commandList.add("-t");
-                    commandList.add(jMeterProperties.getJmxFilePath());
-                    commandList.add("-j");
-                    commandList.add("/dev/stdout");
-                    processBuilder.command(commandList);
-                    processBuilder.redirectErrorStream(true);
-                    try {
-                        Process start = processBuilder.start();
-                        InputStream inputStream = start.getInputStream();
-                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-                        char[] chs = new char[1024];
-                        int len;
-                        while ((len = inputStreamReader.read(chs)) != -1) {
-                            log.info(new String(chs, 0, len));
-                        }
-                        //阻塞当前线程，直到进程退出为止
-                        start.waitFor();
-                        if (start.exitValue() == 0) {
-                            log.info("进程正常结束 {}", scriptLog);
-                        } else {
-                            log.info("进程异常结束");
-                        }
-                        inputStreamReader.close();
-                        inputStream.close();
-                    } catch (IOException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    semaphore.release();
-                    isSomeProcessRun = false;
-                });
-                thread.start();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        String[] scriptPaths = getScriptPath().split("\r?\n|\r");
+        for (String scriptPath : scriptPaths) {
+            log.info("scriptPath: {}", scriptPath);
+            if (isSomeProcessRun) {
+                log.info("有脚本正在运行,无法启动");
+            }
+            if (!isSomeProcessRun) {
+                try {
+                    isSomeProcessRun = true;
+                    semaphore.acquire();
+                    runJmx(jMeterProperties, scriptPath);
+                    log.info("脚本运行完毕");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
+    }
 
-        log.info("脚本已执行");
+    private String getScriptPath() {
+        String scriptPath = "";
+        StringBuilder sb = new StringBuilder();
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        processBuilder.command("/root/getScriptPath.sh");
+        processBuilder.redirectErrorStream(true);
+        try {
+            Process start = processBuilder.start();
+            InputStream inputStream = start.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+            char[] chs = new char[1024];
+            int len;
+            while ((len = inputStreamReader.read(chs)) != -1) {
+                sb.append(new String(chs, 0, len));
+            }
+            start.waitFor();
+            if (start.exitValue() == 0) {
+                scriptPath = sb.toString();
+                log.info("进程正常结束,scriptPath: {}", scriptPath);
+            } else {
+                log.error("进程异常结束,scriptPath: {}", scriptPath);
+            }
+            inputStreamReader.close();
+            inputStream.close();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return scriptPath;
+    }
+
+    private void runJmx(JMeterProperties jMeterProperties, String jmxFilePath) throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            StringBuilder sb = new StringBuilder();
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            Map<String, String> environment = processBuilder.environment(); // 配置JAVA_HOME
+            environment.put("JAVA_HOME", jMeterProperties.getJavaHome());
+            List<String> commandList = new ArrayList<>();
+            commandList.add(jMeterProperties.getJmeterHome()); // 配置JMETER_HOME
+            commandList.add("-n");
+            commandList.add("-t");
+            commandList.add(jmxFilePath);
+            commandList.add("-j");
+            commandList.add("/dev/stdout");
+            processBuilder.command(commandList);
+            processBuilder.redirectErrorStream(true);
+            try {
+                Process start = processBuilder.start();
+                InputStream inputStream = start.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+                char[] chs = new char[1024];
+                int len;
+                while ((len = inputStreamReader.read(chs)) != -1) {
+                    sb.append(new String(chs, 0, len));
+                }
+                start.waitFor();
+                if (start.exitValue() == 0) {
+                    log.info("进程正常结束 {}", sb);
+                } else {
+                    log.error("进程异常结束 {}", sb);
+                }
+                inputStreamReader.close();
+                inputStream.close();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            semaphore.release();
+            isSomeProcessRun = false;
+        });
+        thread.start();
+        thread.join();
     }
 
 }

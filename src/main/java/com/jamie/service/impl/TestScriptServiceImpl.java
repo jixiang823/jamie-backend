@@ -47,7 +47,7 @@ public class TestScriptServiceImpl implements ITestScriptService {
 
     }
 
-    protected void run(String userId, String jmxFilePath) {
+    private void run(String userId, String jmxFilePath) {
         Thread thread = new Thread(() -> {
             // 记录日志
             StringBuilder scriptLog = new StringBuilder();
