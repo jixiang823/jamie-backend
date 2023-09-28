@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class JMeterProperties {
 
     private String jmeterHome;
-    private String jmxFilePath;
+    private String scriptPath;
     private String javaHome;
 
 }

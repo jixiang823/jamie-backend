@@ -23,5 +23,12 @@ server:
 
 jmeter:
   jmeter-home: jmeter
-  jmx-file-path: /Users/jixiang/Downloads/
+  script-path: /Users/jixiang/Downloads/getScriptPath.sh
   java-home: /Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home
+
+ftp:
+  host: localhost
+  port: 21
+  username: jixiang
+  password: 123456
+  file-home: /Users/jixiang/Downloads/scripts

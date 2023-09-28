@@ -51,7 +51,7 @@ public class AutoTestTask implements Runnable{
         String scriptPath = "";
         StringBuilder sb = new StringBuilder();
         ProcessBuilder processBuilder = new ProcessBuilder();
-        processBuilder.command("/root/getScriptPath.sh");
+        processBuilder.command(jMeterProperties.getScriptPath());
         processBuilder.redirectErrorStream(true);
         try {
             Process start = processBuilder.start();
