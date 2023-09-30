@@ -48,7 +48,7 @@ Password: 123456
 ```
 
 ## JMeter配置
-容器环境无需配置, 这里是对本地测试环境做配置.
+容器环境无需配置, 这里是对本地测试环境做配置.(本文演示用脚本下载: https://gitee.com/jixiang823/jamie-report-backend-listener/raw/main/demo.jmx)
 1. 安装JMeter (过程略,自行百度)
    https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-5.6.2.zip
 2. 引入后端监听器
